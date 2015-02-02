@@ -1,0 +1,37 @@
+{
+  "name": "mukla",
+  "version": "0.0.0",
+  "description": "(wip) Mukla.js - promise-based test framework",
+  "scripts": {
+    "lint": "jshint index.js && jscs index.js --reporter inline",
+    "test": "mocha",
+    "test-cov": "istanbul cover _mocha",
+    "test-travis": "istanbul cover _mocha --report lcovonly"
+  },
+  "author": {
+    "name": "Charlike Make Reagent",
+    "email": "mameto_100@mail.bg",
+    "url": "https://github.com/tunnckoCore"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tunnckoCore/mukla.git"
+  },
+  "keywords": [],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/tunnckoCore/mukla/blob/master/license.md"
+  },
+  "dependencies": {
+    "chalk": "^0.5.1",
+    "log-symbols": "^1.0.1"
+  },
+  "devDependencies": {
+    "got": "^2.3.2",
+    "hybridify": "^1.0.6",
+    "istanbul-harmony": "^0.3.1",
+    "mocha": "*",
+    "mocha-lcov-reporter": "^0.0.1",
+    "native-or-bluebird": "^1.1.2"
+  }
+}
