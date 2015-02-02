@@ -6,12 +6,21 @@ Very, very raw ... but easy, lightweight and awesome!
 It is fully async and output results are completely unordered.  
 Just a proof of concept.
 
-
 ## Install
 ```
 npm i --save mukla
 node test.js
 ```
+
+
+## Features / Goals
+- human-readable and human-respectable
+- lightweight and easy to use
+- promise-based
+- assertion library agnostic
+- reporter agnostic
+- asynchronous
+- no more `done`, `end` or etc...
 
 
 ## Usage
@@ -37,7 +46,7 @@ mukla('some title for test', function() {
     mukla('should two + two be strict equal to 4').strictEqual(2 + 2, 4);
     mukla('should `obj` deepEqual to `met`').deepEqual(obj, met);
   })
-  
+
   mukla('should `obj` be typeof object').strictEqual(typeof obj, 'object');
 })
 
