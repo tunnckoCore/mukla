@@ -23,9 +23,22 @@ var mukla = require('mukla');
 var arr = [1, 2, {four: 'five'}]
 var abc = [1, 2, {four: 'five'}]
 
+var obj = {one: 111, two: [1,2,3]}
+var met = {one: 111, two: [1,2,3]}
+
 mukla('some title for test', function() {
   mukla('should one + one be strict equal to 2').strictEqual(1 + 1, 2);
   mukla('should arr deepEqual to abc').deepEqual(arr, abc);
+
+  mukla('some nested testing', function() {
+    var p = mukla('fake data').ok(1 + 13, 14);
+
+    mukla('should mukla(str) methods returns promise').strictEqual(typeof  p.then, 'function')
+    mukla('should two + two be strict equal to 4').strictEqual(2 + 2, 4);
+    mukla('should `obj` deepEqual to `met`').deepEqual(obj, met);
+  })
+  
+  mukla('should `obj` be typeof object').strictEqual(typeof obj, 'object');
 })
 
 // or just asserts
