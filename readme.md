@@ -35,6 +35,7 @@ var abc = [1, 2, {four: 'five'}]
 var obj = {one: 111, two: [1,2,3]}
 var met = {one: 111, two: [1,2,3]}
 
+// just try to break something :)
 mukla('some title for test', function() {
   mukla('should one + one be strict equal to 2').strictEqual(1 + 1, 2);
   mukla('should arr deepEqual to abc').deepEqual(arr, abc);
@@ -57,7 +58,8 @@ mukla('should be truthy value').ok(str);
 ```
 
 
-## API / CLI
+## PRs welcome!
+> Just the ordering and nesting.. and test counting.. but yea, works awesome! :)
 
 
 ## Author
