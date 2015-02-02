@@ -13,12 +13,12 @@ var got = require('got');
 var hybridGot = hybridify(got.get);
 
 
-// mukla('should throw', function() {
-//   function fixture() {
-//     hybridify('string cannot');
-//   }
-//   mukla.throws(fixture, TypeError, 'when first argument not a function')
-// });
+mukla('should throw', function() {
+  function fixture() {
+    hybridify('string cannot');
+  }
+  mukla('when first argument not a function').throws(fixture, TypeError)
+});
 
 mukla('should work with callback api only', function() {
   hybridGot('http://todomvc.com', function(err, res) {
@@ -31,7 +31,7 @@ mukla('should work with callback api only', function() {
 mukla('should work with promise api only', function() {
   hybridGot('http://todomvc.com').then(function(res) {
     // promise api
-    mukla('should `res[0]` starts with `<` (promise api)').strictEqual(res[0][0], '!!!!');
+    mukla('should `res[0]` starts with `<` (promise api)').strictEqual(res[0][0], '<');
     mukla('should `res[1]` be truthy value (promise api)').ok(res[1]);
   });
 });

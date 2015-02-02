@@ -1,11 +1,16 @@
 ## [![npm][npmjs-img]][npmjs-url] [![mit license][license-img]][license-url] [![build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![deps status][daviddm-img]][daviddm-url]
 
-> (wip) Mukla.js - promise-based test framework
+> (wip) Mukla - promise-based test framework.
+
+Very, very raw ... but easy, lightweight and awesome!  
+It is fully async and output results are completely unordered.  
+Just a proof of concept.
+
 
 ## Install
-```bash
+```
 npm i --save mukla
-npm test
+node test.js
 ```
 
 
@@ -14,6 +19,19 @@ npm test
 
 ```js
 var mukla = require('mukla');
+
+var arr = [1, 2, {four: 'five'}]
+var abc = [1, 2, {four: 'five'}]
+
+mukla('some title for test', function() {
+  mukla('should one + one be strict equal to 2').strictEqual(1 + 1, 2);
+  mukla('should arr deepEqual to abc').deepEqual(arr, abc);
+})
+
+// or just asserts
+var str = 'some long string'
+mukla('should `str` be typeof of string').strictEqual(typeof str, 'string');
+mukla('should be truthy value').ok(str);
 ```
 
 
@@ -59,4 +77,4 @@ Released under the [`MIT`][license-url] license.
 
 ***
 
-_Powered and automated by [kdf](https://github.com/tunnckoCore), February 1, 2015_
+_Powered and automated by [kdf](https://github.com/tunnckoCore), February 2, 2015_
