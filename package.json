@@ -1,6 +1,6 @@
 {
   "name": "mukla",
-  "version": "0.0.1-1",
+  "version": "0.0.1-2",
   "description": "(wip) Mukla.js - promise-based test framework",
   "scripts": {
     "lint": "jshint index.js && jscs index.js --reporter inline",
