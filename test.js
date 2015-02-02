@@ -22,7 +22,7 @@ mukla('some title for test', function() {
   mukla('should one + one be strict equal to 2').strictEqual(1 + 1, 2);
   mukla('should arr deepEqual to abc').deepEqual(arr, abc);
   mukla('some nested testing', function() {
-    var p = mukla('fake data').ok(1 + 13, 14);
+    var p = mukla('fake data').ok(true);
     mukla('should mukla(str) methods returns promise').strictEqual(typeof  p.then, 'function')
     mukla('should two + two be strict equal to 4').strictEqual(2 + 2, 4);
     mukla('should `obj` deepEqual to `met`').deepEqual(obj, met);
