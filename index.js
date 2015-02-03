@@ -14,7 +14,7 @@ var logSymbols = require('log-symbols');
 var mukla = module.exports = function mukla(title, fn) {
   var promise = Promise.resolve(1);
   if (!fn && typeof fn !== 'function') {
-    return mode(title, promise);
+    return reporter(title, promise);
   }
   return promise.then(fn.bind(this)).then(function() {
     console.log(logSymbols.success, chalk.grey(title));
@@ -24,17 +24,17 @@ var mukla = module.exports = function mukla(title, fn) {
   });
 }
 
-function mode(subtitle, promise) {
+function reporter(title, promise) {
   var o = {};
   Object.keys(assert).forEach(function(method) {
     o[method] = function(actual, expected) {
       return promise.then(function(res) {
-        assert[method].apply(assert[method], [actual, expected, subtitle]);
-        console.log('  %s %s', logSymbols.success, chalk.grey(subtitle));
+        assert[method].apply(assert[method], [actual, expected, title]);
+        console.log('  %s %s', logSymbols.success, chalk.grey(title));
         return res;
       })
       .catch(function(err) {
-        console.log('  %s %s', logSymbols.error, chalk.grey(subtitle));
+        console.log('  %s %s', logSymbols.error, chalk.grey(title));
         console.log('  ---')
         console.log(chalk.red('  actual: %s'), JSON.stringify(err.actual, 0,0))
         console.log(chalk.green('  expected: %s'), JSON.stringify(err.expected, 0,0))
