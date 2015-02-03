@@ -4,7 +4,9 @@
   "description": "(wip) Mukla.js - promise-based test framework",
   "scripts": {
     "lint": "jshint index.js && jscs index.js --reporter inline",
-    "test": "node test.js"
+    "test": "node test.js",
+    "test-cov": "istanbul cover test.js",
+    "test-travis": "istanbul cover test.js --report lcovonly"
   },
   "author": {
     "name": "Charlike Make Reagent",
@@ -25,11 +27,9 @@
     "log-symbols": "~1.0.1"
   },
   "devDependencies": {
+    "bluebird": "^2.9.6",
     "got": "^2.3.2",
     "hybridify": "^1.0.6",
-    "istanbul-harmony": "^0.3.1",
-    "mocha": "*",
-    "mocha-lcov-reporter": "^0.0.1",
-    "native-or-bluebird": "^1.1.2"
+    "istanbul-harmony": "^0.3.1"
   }
 }
