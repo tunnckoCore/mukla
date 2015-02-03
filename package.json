@@ -4,9 +4,7 @@
   "description": "(wip) Mukla.js - promise-based test framework",
   "scripts": {
     "lint": "jshint index.js && jscs index.js --reporter inline",
-    "test": "mocha",
-    "test-cov": "istanbul cover _mocha",
-    "test-travis": "istanbul cover _mocha --report lcovonly"
+    "test": "node test.js"
   },
   "author": {
     "name": "Charlike Make Reagent",
@@ -23,8 +21,8 @@
     "url": "https://github.com/tunnckoCore/mukla/blob/master/license.md"
   },
   "dependencies": {
-    "chalk": "^0.5.1",
-    "log-symbols": "^1.0.1"
+    "chalk": "~0.5.1",
+    "log-symbols": "~1.0.1"
   },
   "devDependencies": {
     "got": "^2.3.2",
