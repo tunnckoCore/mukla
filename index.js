@@ -11,7 +11,10 @@ var assert = require('assert');
 var globby = require('globby');
 // var Ware = require('ware'); // ???
 var format = require('util').format;
+var eachAsync = require('each-async');
+var Deferred = require('native-or-another');
 var errs = require('handle-errors')('mukla');
+var EventEmitter = require('events').EventEmitter;
 
 module.exports = Mukla;
 
@@ -19,17 +22,14 @@ function Mukla(heading, options) {
   if (!(this instanceof Mukla)) {
     return new Mukla(heading, opts);
   }
-  this.id = 0;
-  this.title = 'unnamed test ' + this.id;
-  this.heading = heading || 'mukla testing:';
-
-  // this.ware = new Ware();
-  this.store = [];
   this.options = options || {};
-  this.current = false;
-  this.isShould = false;
-  this.isThen = false;
-  this.isAssertion = false;
+  this.scenario = 1;
+  this.count = 0;
+  this.fail = 0;
+  this.pass = 0;
+  this.store = [];
+  this.deferred = new Deferred();
+  this.promise = this.deferred.resolve('');
 
   this.defaultOptions();
 };
@@ -41,8 +41,8 @@ function Mukla(heading, options) {
  */
 Mukla.prototype.defaultOptions = function defaultOptions() {
   var self = this;
-  this.options.runner = new EventEmitter();
-  this.options.reporter = new Reporter(this.options.runner, this.options);
+  this.options.runner = this.options.runner; // todo || new EventEmitter()
+  this.options.reporter = this.options.reporter; //todo || new Reporter()
   this.options.files = [];
   globby(['./test.js', './*.test.js', './test'], function(err, files) {
     if (!err) {
@@ -90,29 +90,7 @@ Mukla.prototype.should = function should(title, fn, id) {
   if (!title) {
     errs.error('`.should` method expect at least 1 argument - string');
   }
-  if (typeof fn === 'number') {
-    id = fn;
-    fn = undefined;
-  }
 
-  id = this.id = id ? id : this.store.length + 1;
-
-  if (this.store[id].id === id) {
-    errs.error(format('this `%s` test id already exist', id);
-  }
-
-  this.current = {
-    suite: true,
-    test: fn ? fn : false,
-    assertion: false,
-    title: title,
-    fn: fn,
-    id: id
-  };
-  if (fn) {
-    this.store.push(this.current);
-    this.current = false;
-  }
   return this;
 };
 
@@ -131,11 +109,6 @@ Mukla.prototype.then = function then(title, fn) {
     errs.error('`.then/.be` method at least 2 arguments - string and function');
   }
 
-  if (!this.current) {
-    //todo this.current
-  }
-
-  this.store.push(test);
   return this;
 };
 
@@ -151,3 +124,47 @@ Mukla.prototype.be = function be(title, fn) {
   this.then('be ' + title, fn);
   return this;
 }
+
+
+eachAsync(assert, function(method) {
+  Mukla.prototype[method] = function(title, actual, expected) {
+    var self = this;
+    var emit = this.options.runner.emit;
+    var o = {
+      type: 'assert',
+      title: title,
+      pass: false,
+      fail: false,
+      id: 0
+    };
+
+    this.promise
+    .then(function() {
+      assert[method].apply(assert[method], [actual, expected, title]);
+      o.pass = true;
+      emit('pass', o);
+      emit('assert', o);
+      emit('assert pass', o);
+    })
+    .catch(function(err) {
+      emit('error', err);
+      o.fail = true;
+      emit('fail', o);
+      emit('assert', o);
+      emit('assert fail', o);
+    });
+
+    return self;
+  };
+});
+
+// possible:
+// mukla().equal(title, actual, expected) // scenario 1
+// mukla().should(title).equal(title, actual, expected) // scenario 2
+// mukla().should(title, fn) // scenario 3
+// mukla().then(title, fn) // scenario 4
+// mukla().should(title).then(title, fn) // scenario 5
+// mukla().should(title).then(title, fn).then(title, fn)
+
+// .should and .then emits `suite`
+// .equal emit `assert`, `assert pass`, `assert fail`, `pass` and `fail`
