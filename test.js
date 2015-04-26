@@ -34,10 +34,10 @@ mukla.on('start', function _muklaError(storage) {
   this.emit('test', storage);
 });
 mukla.on('suite', function(suite) {
-   console.log('#', suite.title);
+   console.log('# suite:', suite.title);
 });
 mukla.on('suite end', function(suite) {
-   console.log('end', suite.title);
+   console.log('# suite end:', suite.title);
 });
 mukla.on('pass', function(test) {
   console.log('  ok %s (%s)', test.title, test.duration);
@@ -62,16 +62,6 @@ mukla.describe('mukla:', function() {
     done();
   });
   mukla.it('test 2', function(done) {
-    assert.strictEqual(typeof 2134234, 'function');
-    done();
-  });
-});
-mukla.describe('mukla2:', function() {
-  mukla.it('test 3', function(done) {
-    assert.strictEqual(typeof 123, 'function');
-    done();
-  });
-  mukla.it('test 4', function(done) {
     assert.strictEqual(typeof 2134234, 'function');
     done();
   });

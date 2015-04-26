@@ -51,7 +51,7 @@ Mukla.prototype.suite = function _describe(title, fn) {
     throw new Error('mukla.describe() should be synchronous.');
   }
   this.suites++;
-  this.describes.push({title: title, fn: fn});
+  this.emit('suite', {title: title, fn: fn});
   fn();
   this.run();
 };
@@ -63,15 +63,10 @@ Mukla.prototype.run = function _run() {
     throw new Error('mukla.run() should have defined tests.');
   }
   this.emit('start', {init: true});
-  var suite = this.describes.shift()
-
-  if (!this.describes.length) {
-    self.emit('end', self);
-    return;
-  }
-  self.emit('suite', suite);
   self.series(tree)(function(err, res) {
-    self.emit('suite end', suite);
+    // @todo
+    self.emit('suite end', self);
+    self.emit('end', self);
   });
 
 };
