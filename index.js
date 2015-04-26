@@ -16,9 +16,10 @@ function Mukla() {
   this.tests = 0;
   this.passing = 0;
   this.failing = 0;
+  this.describes = [];
   this._settle = true;
 }
-inherits(Mukla, Undertaker)
+inherits(Mukla, Undertaker);
 
 Mukla.prototype.it =
 Mukla.prototype.test = function _it(title, fn) {
@@ -36,7 +37,7 @@ Mukla.prototype.test = function _it(title, fn) {
 
 Mukla.prototype.it.skip = function _itSkip(title, fn) {
   this.emit('pending', {title: title, fn: fn, duration: 0})
-}
+};
 
 Mukla.prototype.describe =
 Mukla.prototype.suite = function _describe(title, fn) {
@@ -50,45 +51,53 @@ Mukla.prototype.suite = function _describe(title, fn) {
     throw new Error('mukla.describe() should be synchronous.');
   }
   this.suites++;
-  var suite = {title: title, fn: fn};
-  this.emit('suite', suite);
+  this.describes.push({title: title, fn: fn});
   fn();
-  this.emit('suite end', suite);
   this.run();
-}
+};
+
 Mukla.prototype.run = function _run() {
   var self = this;
   var tree = this.tree();
   if (tree.length < 1) {
     throw new Error('mukla.run() should have defined tests.');
   }
-  this.emit('run');
-  this.series(tree)(function(err, res) {
+  this.emit('start', {init: true});
+  var suite = this.describes.shift()
+
+  if (!this.describes.length) {
     self.emit('end', self);
+    return;
+  }
+  self.emit('suite', suite);
+  self.series(tree)(function(err, res) {
+    self.emit('suite end', suite);
   });
-}
 
-var mukla = new Mukla();
+};
+Mukla.prototype.Mukla = Mukla;
 
-mukla.on('error', function _muklaError(storage) {
-  this.tests++;
-  this.failing++;
-  storage.title = storage.name;
-  this.emit('fail', storage);
-  this.emit('test', storage);
-});
-mukla.on('stop', function _muklaTestEnd(storage) {
-  this.tests++;
-  this.passing++;
-  storage.title = storage.name;
-  this.emit('pass', storage);
-  this.emit('test', storage);
-  this.emit('test end', storage);
-});
+// var mukla = new Mukla();
 
-module.exports = mukla;
+// mukla.on('error', function _muklaError(storage) {
+//   this.failing++;
+//   storage.title = storage.name;
+//   this.emit('fail', storage);
+//   this.emit('test end', storage);
+// });
+// mukla.on('stop', function _muklaTestEnd(storage) {
+//   this.passing++;
+//   storage.title = storage.name;
+//   this.emit('pass', storage);
+//   this.emit('test end', storage);
+// });
+// mukla.on('start', function _muklaError(storage) {
+//   this.tests++;
+//   storage.title = storage.name;
+//   this.emit('test', storage);
+// });
 
-
+module.exports = new Mukla();
 
 // start - start of program
 // end - end of program
