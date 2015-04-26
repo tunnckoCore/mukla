@@ -13,37 +13,36 @@ var mukla = require('./index');
 
 mukla.once('start', function(stats) {
   if (stats.init) return;
-  console.log()
   mukla.removeAllListeners('start')
 })
 mukla.on('error', function _muklaError(storage) {
+  this.tests++;
   this.failing++;
   storage.title = storage.name;
   this.emit('fail', storage);
   this.emit('test end', storage);
 });
 mukla.on('stop', function _muklaTestEnd(storage) {
+  this.tests++;
   this.passing++;
   storage.title = storage.name;
   this.emit('pass', storage);
   this.emit('test end', storage);
 });
-mukla.on('start', function _muklaError(storage) {
-  this.tests++;
-  storage.title = storage.name;
-  this.emit('test', storage);
-});
 mukla.on('suite', function(suite) {
-   console.log('# suite:', suite.title);
+  console.log()
+  console.log('# suite:', suite.title);
 });
-mukla.on('suite end', function(suite) {
-   console.log('# suite end:', suite.title);
+mukla.on('suite end', function() {
+  console.log('# suite end');
 });
 mukla.on('pass', function(test) {
-  console.log('  ok %s (%s)', test.title, test.duration);
+  var ms = test.duration[1].toString();
+  console.log('# %s ok %s (%s)', test.uid+1, test.title, ms.slice(0, ms.length - 6) + 'ms');
 });
 mukla.on('fail', function(test) {
-  console.log('  not ok %s (%s)', test.title, test.duration);
+  var ms = test.duration[1].toString();
+  console.log('# %s ok %s (%s)', test.uid+1, test.title, ms.slice(0, ms.length - 6) + 'ms');
 });
 mukla.once('end', function(stats) {
   console.log();
