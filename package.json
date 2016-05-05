@@ -11,7 +11,9 @@
     "test": "standard && node test.js"
   },
   "dependencies": {
+    "core-assert": "^0.2.0",
     "error-symbol": "^0.1.0",
+    "extend-shallow": "^2.0.1",
     "failing-code": "github:azer/failing-code",
     "lazy-cache": "^2.0.1",
     "relike": "^1.0.3",

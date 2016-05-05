@@ -24,7 +24,9 @@ require = utils // eslint-disable-line no-undef, no-native-reassign
  * Lazily required module dependencies
  */
 
+require('core-assert', 'assert')
 require('error-symbol', 'error')
+require('extend-shallow', 'extend')
 require('failing-code')
 require('relike')
 require('success-symbol', 'success')

@@ -22,12 +22,12 @@ var mukla = module.exports = function mukla (name, fn) {
   time.start(name)
 
   return utils.relike.call(this, fn).then(
-    onSuccess(name, fn, time),
-    onFailure(name, fn, time)
+    mukla.onSuccess(name, fn, time),
+    mukla.onFailure(name, fn, time)
   ).catch(console.error)
 }
 
-function onSuccess (name, fn, time) {
+mukla.onSuccess = function onSuccess (name, fn, time) {
   return function pass () {
     if (mukla.reporter && mukla.reporter.emit) {
       mukla.reporter.emit('pass', name, fn)
@@ -37,7 +37,7 @@ function onSuccess (name, fn, time) {
   }
 }
 
-function onFailure (name, fn, time) {
+mukla.onFailure = function onFailure (name, fn, time) {
   return function fail (err) {
     if (mukla.reporter && mukla.reporter.emit) {
       mukla.reporter.emit('fail', err, name, fn)
@@ -51,8 +51,11 @@ function onFailure (name, fn, time) {
 
     console.error('  -----')
     console.error('  ', err.toString())
-    console.error('   at:', at)
+    console.error('     at:', at)
+    console.error('   line:', code.code)
     console.error('  -----')
-    console.error('')
+    process.exit(1)
   }
 }
+
+utils.extend(mukla, utils.assert)
