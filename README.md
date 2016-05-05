@@ -4,6 +4,19 @@
 
 [![code climate][codeclimate-img]][codeclimate-url] [![standard code style][standard-img]][standard-url] [![travis build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![dependency status][david-img]][david-url]
 
+## Features / Main Points
+- Lightweight, simple and fast.
+- Small to download and install.
+- Easy to learn, actually nothing - it is just a simple function.
+- Includes [core-assert][] to provide few modern things down to `0.10`.
+- Promises based - native promise is used on modern, bluebird on `0.10`.
+- No stacktraces. Shows you `err.toString()`, filename, position and the failing line.
+- Support for custom reporters - it just emits two events: `pass` and `fail`.
+  + Reporeters should be just event emitter.
+  + One simple built-in reporter.
+- "Fail-first", meaining it stops after the first failing test.
+  + Not wanted, but with that design that's all we can do.
+
 ## Install
 ```
 npm i mukla --save
@@ -23,6 +36,8 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 ## [Charlike Make Reagent](http://j.mp/1stW47C) [![new message to charlike][new-message-img]][new-message-url] [![freenode #charlike][freenode-img]][freenode-url]
 
 [![tunnckoCore.tk][author-www-img]][author-www-url] [![keybase tunnckoCore][keybase-img]][keybase-url] [![tunnckoCore npm][author-npm-img]][author-npm-url] [![tunnckoCore twitter][author-twitter-img]][author-twitter-url] [![tunnckoCore github][author-github-img]][author-github-url]
+
+[core-assert]: https://github.com/sindresorhus/core-assert
 
 [npmjs-url]: https://www.npmjs.com/package/mukla
 [npmjs-img]: https://img.shields.io/npm/v/mukla.svg?label=mukla

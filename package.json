@@ -40,6 +40,9 @@
     ],
     "lint": {
       "reflinks": true
-    }
+    },
+    "reflinks": [
+      "core-assert"
+    ]
   }
 }
