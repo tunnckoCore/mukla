@@ -28,6 +28,7 @@ require('core-assert')
 require('error-symbol')
 require('extend-shallow')
 require('failing-code')
+require('get-fn-name')
 require('relike')
 require('success-symbol')
 

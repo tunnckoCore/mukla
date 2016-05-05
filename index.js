@@ -12,11 +12,12 @@ var utils = require('./utils')
 var mukla = module.exports = function mukla (name, fn) {
   if (typeof name === 'function') {
     fn = name
-    name = 'anonymous'
+    name = null
   }
   if (typeof fn !== 'function') {
     throw new TypeError('mukla: expect at least `fn` be function')
   }
+  name = name || utils.getFnName(fn) || 'anonymous'
   mukla.emit = mukla.reporter && mukla.reporter.emit || null
   mukla.emit = typeof mukla.emit === 'function' ? mukla.emit : null
 

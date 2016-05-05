@@ -15,6 +15,7 @@
     "error-symbol": "^0.1.0",
     "extend-shallow": "^2.0.1",
     "failing-code": "github:azer/failing-code",
+    "get-fn-name": "^1.0.0",
     "lazy-cache": "^2.0.1",
     "relike": "^1.0.3",
     "success-symbol": "^0.1.0"
