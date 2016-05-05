@@ -26,6 +26,7 @@ require = utils // eslint-disable-line no-undef, no-native-reassign
 
 require('core-assert')
 require('error-symbol')
+require('extend-shallow')
 require('failing-code')
 require('relike')
 require('success-symbol')

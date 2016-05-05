@@ -7,23 +7,58 @@
 
 'use strict'
 
+var test = require('assertit')
 var mukla = require('./index')
+var capture = require('capture-stream')
 
-mukla('foo bar baz', function (done) {
-  mukla.strictEqual(1, 1)
-  mukla.deepEqual(1, 1)
+test('should throw TypeError if not at least function passed', function (done) {
+  function fixture () {
+    mukla(123)
+  }
+  test.throws(fixture, TypeError)
+  test.throws(fixture, /expect at least `fn` be function/)
   done()
 })
 
-mukla('qux should be fail', function (done) {
-  mukla.strictEqual(22422, 1)
-  mukla.deepEqual(1, 1111)
+test('should expose function', function (done) {
+  test.strictEqual(typeof mukla, 'function')
   done()
 })
 
-mukla('should be okey with async', function (done) {
+test('should expose assert methods', function (done) {
+  test.strictEqual(typeof mukla.strictEqual, 'function')
+  test.strictEqual(typeof mukla.deepEqual, 'function')
+  test.strictEqual(typeof mukla.equal, 'function')
+  test.strictEqual(typeof mukla.ok, 'function')
+  done()
+})
+
+test('should be able to have "unnamed" tests when only function passed', function (done) {
+  var restore = capture(process.stdout)
   setTimeout(function () {
-    mukla.strictEqual(2, 2)
+    mukla(function () {
+      console.log('foo')
+    })
+  }, 1)
+  setTimeout(function () {
+    var output = restore(true).trim()
+    test.strictEqual(/foo/.test(output), true)
+    test.strictEqual(/anonymous/.test(output), true)
     done()
-  }, Math.random())
+  }, 2)
+})
+
+test('should be able to pass "named" tests when `name` and `fn` passed', function (done) {
+  var restore = capture(process.stdout)
+  setTimeout(function () {
+    mukla('foo bar test', function () {
+      console.log('here some assert')
+    })
+  }, 1)
+  setTimeout(function () {
+    var output = restore(true).trim()
+    test.strictEqual(/foo bar test/.test(output), true)
+    test.strictEqual(/here some assert/.test(output), true)
+    done()
+  }, 2)
 })

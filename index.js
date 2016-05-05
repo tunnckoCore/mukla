@@ -17,32 +17,31 @@ var mukla = module.exports = function mukla (name, fn) {
   if (typeof fn !== 'function') {
     throw new TypeError('mukla: expect at least `fn` be function')
   }
+  mukla.emit = mukla.reporter && mukla.reporter.emit || null
+  mukla.emit = typeof mukla.emit === 'function' ? mukla.emit : null
 
-  return utils.relike.call(this, fn).then(
-    mukla.onSuccess(name, fn),
-    mukla.onFailure(name, fn)
-  ).catch(function (err) {
-    console.error(err && err.stack)
-  })
+  return utils.relike.call(this, fn)
+    .then(
+      mukla.onSuccess(name, fn),
+      mukla.onFailure(name, fn)
+    )
+    .catch(function (err) {
+      console.error(err && err.stack)
+    })
 }
 
 mukla.onSuccess = function onSuccess (name, fn) {
   return function pass () {
-    if (mukla.reporter && mukla.reporter.emit) {
-      mukla.reporter.emit('pass', name, fn)
-      return
-    }
-    console.log('', utils.successSymbol, name)
+    if (mukla.emit) mukla.emit('pass', name, fn)
+    else console.log('', utils.successSymbol, name)
   }
 }
 
 mukla.onFailure = function onFailure (name, fn) {
+  /* istanbul ignore next */
   return function fail (err) {
-    if (mukla.reporter && mukla.reporter.emit) {
-      mukla.reporter.emit('fail', err, name, fn)
-      return
-    }
-    console.error('', utils.errorSymbol, name)
+    if (mukla.emit) mukla.emit('fail', err, name, fn)
+    else console.log('', utils.errorSymbol, name)
 
     var codes = utils.failingCode(err)
     var code = codes[1]
