@@ -34,7 +34,7 @@ var utils = require('./utils')
  *
  * // ES2015 successful test
  * // with `anonymous` title
- * test((done) => {
+ * test(done => {
  *   test.strictEqual(1, 1)
  *   done()
  * })

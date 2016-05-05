@@ -27,9 +27,39 @@ npm i mukla --save
 ## Usage
 > For more use-cases see the [tests](./test.js)
 
+### ES2015 way
+
 ```js
-const mukla = require('mukla')
+import test from 'mukla'
+
+test(done => {
+  test.deepEqual([1, 2], [1, 2]) // passing
+  done()
+})
+
+// or without `done`
+test(() => {
+  test.strictEqual(1, 2) // failing
+})
 ```
+
+### The old way
+
+```js
+var test = require('mukla')
+
+test(function (done) {
+  test.deepEqual([1, 2], [1, 2]) // passing
+  done()
+})
+
+// or without `done`
+test(function () {
+  test.strictEqual(1, 2) // failing
+})
+```
+
+## API
 
 ### [mukla](index.js#L65)
 > Runs `fn` test and outputs the `name` of the test. If only function is given and it is anonymous, the name of the test is `anonymous`, otherwise the name of the `fn` function.
@@ -59,7 +89,7 @@ test(function () {
 
 // ES2015 successful test
 // with `anonymous` title
-test((done) => {
+test(done => {
   test.strictEqual(1, 1)
   done()
 })
