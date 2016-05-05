@@ -60,18 +60,31 @@
     "word"
   ],
   "verb": {
+    "reflinks": [
+      "assertit",
+      "core-assert",
+      "use",
+      "limon"
+    ],
     "run": true,
     "toc": false,
     "layout": "empty",
-    "tasks": [
-      "readme"
-    ],
     "lint": {
       "reflinks": true
     },
-    "reflinks": [
-      "core-assert",
-      "assertit"
-    ]
+    "tasks": [
+      "readme"
+    ],
+    "related": {
+      "list": [
+        "assertit",
+        "limon",
+        "limon-prev-next",
+        "postjson",
+        "relike",
+        "use",
+        "use-ware"
+      ]
+    }
   }
 }
