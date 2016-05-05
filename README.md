@@ -11,6 +11,8 @@
 - Includes [core-assert][] to provide few modern things down to `0.10`.
 - Promises based - native promise is used on modern, bluebird on `0.10`.
 - No stacktraces. Shows you `err.toString()`, filename, position and the failing line.
+- Backward-compatible with [assertit][]. I'm using it from 1+ year everywhere in my 270+ packages.
+- Support for node 0.10 for next couple of months.
 - Support for custom reporters - it just emits two events: `pass` and `fail`.
   + Reporeters should be just event emitter.
   + One simple built-in reporter.
@@ -37,6 +39,7 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 
 [![tunnckoCore.tk][author-www-img]][author-www-url] [![keybase tunnckoCore][keybase-img]][keybase-url] [![tunnckoCore npm][author-npm-img]][author-npm-url] [![tunnckoCore twitter][author-twitter-img]][author-twitter-url] [![tunnckoCore github][author-github-img]][author-github-url]
 
+[assertit]: https://github.com/tunnckoCore/assertit
 [core-assert]: https://github.com/sindresorhus/core-assert
 
 [npmjs-url]: https://www.npmjs.com/package/mukla

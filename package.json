@@ -42,7 +42,8 @@
       "reflinks": true
     },
     "reflinks": [
-      "core-assert"
+      "core-assert",
+      "assertit"
     ]
   }
 }
