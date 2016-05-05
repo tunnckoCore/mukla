@@ -1,6 +1,6 @@
 {
   "name": "mukla",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Simple and fast test runner, based on promises with basic reporter and clean stacktraces. Support custom reporters, sync, async and generator functions.",
   "repository": "tunnckoCore/mukla",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
