@@ -20,20 +20,39 @@ var utils = require('./utils')
  * ```js
  * var test = require('mukla')
  *
+ * // regular failing test
  * test('title of test', function (done) {
  *   test.strictEqual(1, 2)
  *   done()
  * })
  *
- * // sync test with `anonymous` title
+ * // without need to call `done`
+ * // with `anonymous` title
  * test(function () {
- *   test.strictEqual(1, 2)
+ *   test.ok(555)
  * })
  *
- * // ES2015
- * test(done => {
+ * // ES2015 successful test
+ * // with `anonymous` title
+ * test((done) => {
  *   test.strictEqual(1, 1)
  *   done()
+ * })
+ *
+ * // returning rejected promise
+ * test('should be failing test', () => {
+ *   return Promise.reject(new Error('oooh no!'))
+ * })
+ *
+ * // regular test, returning (promise) another test
+ * test('old school javascript', function () {
+ *   test.deepEqual([1, 2, 3], [1, 2, 3]) // pass
+ *
+ *   return test('nested?', function (done) {
+ *     mukla.deepEqual([1, 2, 3], 555)
+ *     // => throws and shows `nested?` as title, not the other
+ *     done()
+ *   })
  * })
  * ```
  *

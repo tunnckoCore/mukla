@@ -14,7 +14,7 @@
 - Backward-compatible with [assertit][]. I'm using it from 1+ year everywhere in my 270+ packages.
 - Support for node 0.10 for next couple of months.
 - Support for custom reporters - it just emits two events: `pass` and `fail`.
-  + Reporeters should be just event emitter.
+  + Reporeter should be just event emitter.
   + One simple built-in reporter.
 - "Fail-first", meaining it stops after the first failing test.
   + Not wanted, but with that design that's all we can do.
@@ -31,7 +31,7 @@ npm i mukla --save
 const mukla = require('mukla')
 ```
 
-### [mukla](index.js#L46)
+### [mukla](index.js#L65)
 > Runs `fn` test and outputs the `name` of the test. If only function is given and it is anonymous, the name of the test is `anonymous`, otherwise the name of the `fn` function.
 
 **Params**
@@ -45,20 +45,39 @@ const mukla = require('mukla')
 ```js
 var test = require('mukla')
 
+// regular failing test
 test('title of test', function (done) {
   test.strictEqual(1, 2)
   done()
 })
 
-// sync test with `anonymous` title
+// without need to call `done`
+// with `anonymous` title
 test(function () {
-  test.strictEqual(1, 2)
+  test.ok(555)
 })
 
-// ES2015
-test(done => {
+// ES2015 successful test
+// with `anonymous` title
+test((done) => {
   test.strictEqual(1, 1)
   done()
+})
+
+// returning rejected promise
+test('should be failing test', () => {
+  return Promise.reject(new Error('oooh no!'))
+})
+
+// regular test, returning (promise) another test
+test('old school javascript', function () {
+  test.deepEqual([1, 2, 3], [1, 2, 3]) // pass
+
+  return test('nested?', function (done) {
+    mukla.deepEqual([1, 2, 3], 555)
+    // => throws and shows `nested?` as title, not the other
+    done()
+  })
 })
 ```
 
