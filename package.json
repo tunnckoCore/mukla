@@ -1,7 +1,7 @@
 {
   "name": "mukla",
   "version": "0.2.0",
-  "description": "Simple and fast test runner, based on promises with basic reporter and clean stacktraces.",
+  "description": "Simple and fast test runner, based on promises with basic reporter and clean stacktraces. Support custom reporters, sync, async and generator functions.",
   "repository": "tunnckoCore/mukla",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
   "precommit.silent": true,
@@ -13,12 +13,10 @@
   "dependencies": {
     "core-assert": "^0.2.0",
     "error-symbol": "^0.1.0",
-    "extend-shallow": "^2.0.1",
     "failing-code": "github:azer/failing-code",
     "lazy-cache": "^2.0.1",
     "relike": "^1.0.3",
-    "success-symbol": "^0.1.0",
-    "time-diff": "^0.3.1"
+    "success-symbol": "^0.1.0"
   },
   "devDependencies": {
     "assertit": "^0.1.0",

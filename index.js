@@ -18,32 +18,31 @@ var mukla = module.exports = function mukla (name, fn) {
     throw new TypeError('mukla: expect at least `fn` be function')
   }
 
-  var time = utils.timediff()
-  time.start(name)
-
   return utils.relike.call(this, fn).then(
-    mukla.onSuccess(name, fn, time),
-    mukla.onFailure(name, fn, time)
-  ).catch(console.error)
+    mukla.onSuccess(name, fn),
+    mukla.onFailure(name, fn)
+  ).catch(function (err) {
+    console.error(err && err.stack)
+  })
 }
 
-mukla.onSuccess = function onSuccess (name, fn, time) {
+mukla.onSuccess = function onSuccess (name, fn) {
   return function pass () {
     if (mukla.reporter && mukla.reporter.emit) {
       mukla.reporter.emit('pass', name, fn)
       return
     }
-    time.diff(name, 'success')
+    console.log('', utils.successSymbol, name)
   }
 }
 
-mukla.onFailure = function onFailure (name, fn, time) {
+mukla.onFailure = function onFailure (name, fn) {
   return function fail (err) {
     if (mukla.reporter && mukla.reporter.emit) {
       mukla.reporter.emit('fail', err, name, fn)
       return
     }
-    time.diff(name, 'error')
+    console.error('', utils.errorSymbol, name)
 
     var codes = utils.failingCode(err)
     var code = codes[1]
@@ -58,4 +57,4 @@ mukla.onFailure = function onFailure (name, fn, time) {
   }
 }
 
-utils.extend(mukla, utils.assert)
+utils.extendShallow(mukla, utils.coreAssert)

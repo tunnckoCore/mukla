@@ -24,34 +24,17 @@ require = utils // eslint-disable-line no-undef, no-native-reassign
  * Lazily required module dependencies
  */
 
-require('core-assert', 'assert')
-require('error-symbol', 'error')
-require('extend-shallow', 'extend')
+require('core-assert')
+require('error-symbol')
 require('failing-code')
 require('relike')
-require('success-symbol', 'success')
-require('time-diff', 'Time')
+require('success-symbol')
 
 /**
  * Restore `require`
  */
 
 require = fn // eslint-disable-line no-undef, no-native-reassign
-
-utils.timediff = function timediff () {
-  var time = new utils.Time()
-  var res = {}
-  res.start = time.start.bind(time)
-  res.diff = function diff (name, type) {
-    return time.diff(name, {
-      nocolor: true,
-      formatArgs: function (ts, name, elapsed) {
-        return ['', utils[type], name, '(' + elapsed + ')']
-      }
-    })()
-  }
-  return res
-}
 
 /**
  * Expose `utils` modules
