@@ -9,6 +9,40 @@
 
 var utils = require('./utils')
 
+/**
+ * > Runs `fn` test and outputs the `name` of the test.
+ * If only function is given and it is anonymous, the
+ * name of the test is `anonymous`, otherwise the name
+ * of the `fn` function.
+ *
+ * **Example**
+ *
+ * ```js
+ * var test = require('mukla')
+ *
+ * test('title of test', function (done) {
+ *   test.strictEqual(1, 2)
+ *   done()
+ * })
+ *
+ * // sync test with `anonymous` title
+ * test(function () {
+ *   test.strictEqual(1, 2)
+ * })
+ *
+ * // ES2015
+ * test(done => {
+ *   test.strictEqual(1, 1)
+ *   done()
+ * })
+ * ```
+ *
+ * @param  {String|Function} `name` The name of the test or `fn`.
+ * @param  {Function=} `[fn]` Test function, wrapped in promise.
+ * @return {Promise}
+ * @api public
+ */
+
 var mukla = module.exports = function mukla (name, fn) {
   if (typeof name === 'function') {
     fn = name
@@ -31,12 +65,38 @@ var mukla = module.exports = function mukla (name, fn) {
     })
 }
 
+/**
+ * Extending `mukla` with `core-assert` methods.
+ *
+ * @api private
+ */
+
+utils.extendShallow(mukla, utils.coreAssert)
+
+/**
+ * > When test is successful.
+ *
+ * @param  {String}   `name`
+ * @param  {Function} `fn`
+ * @return {Function}
+ * @api private
+ */
+
 mukla.onSuccess = function onSuccess (name, fn) {
   return function pass () {
     if (mukla.emit) mukla.emit('pass', name, fn)
     else console.log('', utils.successSymbol, name)
   }
 }
+
+/**
+ * > When test is failure.
+ *
+ * @param  {String}   `name`
+ * @param  {Function} `fn`
+ * @return {Function}
+ * @api private
+ */
 
 mukla.onFailure = function onFailure (name, fn) {
   /* istanbul ignore next */
@@ -56,5 +116,3 @@ mukla.onFailure = function onFailure (name, fn) {
     process.exit(1)
   }
 }
-
-utils.extendShallow(mukla, utils.coreAssert)

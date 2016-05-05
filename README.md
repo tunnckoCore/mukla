@@ -31,6 +31,37 @@ npm i mukla --save
 const mukla = require('mukla')
 ```
 
+### [mukla](index.js#L46)
+> Runs `fn` test and outputs the `name` of the test. If only function is given and it is anonymous, the name of the test is `anonymous`, otherwise the name of the `fn` function.
+
+**Params**
+
+* `name` **{String|Function}**: The name of the test or `fn`.    
+* `[fn]` **{Function=}**: Test function, wrapped in promise.    
+* `returns` **{Promise}**  
+
+**Example**
+
+```js
+var test = require('mukla')
+
+test('title of test', function (done) {
+  test.strictEqual(1, 2)
+  done()
+})
+
+// sync test with `anonymous` title
+test(function () {
+  test.strictEqual(1, 2)
+})
+
+// ES2015
+test(done => {
+  test.strictEqual(1, 1)
+  done()
+})
+```
+
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/tunnckoCore/mukla/issues/new).  
 But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines.
