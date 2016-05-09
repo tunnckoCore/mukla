@@ -36,8 +36,9 @@ test('should expose assert methods', function (done) {
 test('should be able to have "unnamed" tests when only function passed', function (done) {
   var restore = capture(process.stdout)
   setTimeout(function () {
-    mukla(function () {
+    mukla(function (done) {
       console.log('foo')
+      done()
     })
   }, 1)
   setTimeout(function () {
@@ -51,8 +52,9 @@ test('should be able to have "unnamed" tests when only function passed', functio
 test('should be able to pass "named" tests when `name` and `fn` passed', function (done) {
   var restore = capture(process.stdout)
   setTimeout(function () {
-    mukla('foo bar test', function () {
+    mukla('foo bar test', function (done) {
       console.log('here some assert')
+      done()
     })
   }, 1)
   setTimeout(function () {

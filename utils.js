@@ -24,12 +24,12 @@ require = utils // eslint-disable-line no-undef, no-native-reassign
  * Lazily required module dependencies
  */
 
+require('async-done')
 require('core-assert')
 require('error-symbol')
 require('extend-shallow')
-require('failing-code')
 require('get-fn-name')
-require('relike')
+require('stack-utils', 'StackUtils')
 require('success-symbol')
 
 /**

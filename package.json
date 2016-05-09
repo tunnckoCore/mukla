@@ -11,13 +11,13 @@
     "test": "standard && node test.js"
   },
   "dependencies": {
+    "async-done": "^1.2.0",
     "core-assert": "^0.2.0",
     "error-symbol": "^0.1.0",
     "extend-shallow": "^2.0.1",
-    "failing-code": "github:azer/failing-code",
     "get-fn-name": "^1.0.0",
     "lazy-cache": "^2.0.1",
-    "relike": "^1.0.3",
+    "stack-utils": "^0.4.0",
     "success-symbol": "^0.1.0"
   },
   "devDependencies": {

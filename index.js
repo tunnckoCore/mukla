@@ -8,6 +8,7 @@
 'use strict'
 
 var utils = require('./utils')
+var stackUtils = new utils.StackUtils()
 
 /**
  * > Runs `fn` test and outputs the `name` of the test.
@@ -74,14 +75,10 @@ var mukla = module.exports = function mukla (name, fn) {
   mukla.emit = mukla.reporter && mukla.reporter.emit || null
   mukla.emit = typeof mukla.emit === 'function' ? mukla.emit : null
 
-  return utils.relike.call(this, fn)
-    .then(
-      mukla.onSuccess(name, fn),
-      mukla.onFailure(name, fn)
-    )
-    .catch(function (err) {
-      console.error(err && err.stack)
-    })
+  utils.asyncDone(fn.bind(this || mukla.context), function (err, res) {
+    if (err) return mukla.onFailure(name, fn)(err)
+    mukla.onSuccess(name, fn)()
+  })
 }
 
 /**
@@ -103,8 +100,11 @@ utils.extendShallow(mukla, utils.coreAssert)
 
 mukla.onSuccess = function onSuccess (name, fn) {
   return function pass () {
-    if (mukla.emit) mukla.emit('pass', name, fn)
-    else console.log('', utils.successSymbol, name)
+    if (mukla.emit) {
+      mukla.emit('pass', name, fn)
+      return
+    }
+    console.log('', utils.successSymbol, name)
   }
 }
 
@@ -120,18 +120,22 @@ mukla.onSuccess = function onSuccess (name, fn) {
 mukla.onFailure = function onFailure (name, fn) {
   /* istanbul ignore next */
   return function fail (err) {
-    if (mukla.emit) mukla.emit('fail', err, name, fn)
-    else console.log('', utils.errorSymbol, name)
+    if (mukla.emit) {
+      mukla.emit('fail', err, name, fn)
+      return
+    }
+    var stack = stackUtils.clean(err.stack)
+    var newline = stack.indexOf('\n')
 
-    var codes = utils.failingCode(err)
-    var code = codes[1]
-    var at = code.filename + ':' + code.line + ':' + code.col
+    console.error('', utils.errorSymbol, name)
+    console.error(' ---')
+    console.error('', err.toString())
+    console.error('       at:', stack.slice(0, newline))
 
-    console.error('  -----')
-    console.error('  ', err.toString())
-    console.error('     at:', at)
-    console.error('   line:', code.code)
-    console.error('  -----')
+    if (err.actual) console.error('   actual:', err.actual)
+    if (err.expected) console.error(' expected:', err.expected)
+
+    console.error(' ---')
     process.exit(1)
   }
 }
