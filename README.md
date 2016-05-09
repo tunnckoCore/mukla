@@ -1,6 +1,6 @@
 # [mukla][author-www-url] [![npmjs.com][npmjs-img]][npmjs-url] [![The MIT License][license-img]][license-url] [![npm downloads][downloads-img]][downloads-url] 
 
-> Simple and fast test runner, based on promises with basic reporter and clean stacktraces. Support custom reporters, sync, async and generator functions.
+> Simple and fast test runner with basic reporter and clean stacktraces. Support custom reporters and async functions. Using [async-done][] under the hood.
 
 [![code climate][codeclimate-img]][codeclimate-url] [![standard code style][standard-img]][standard-url] [![travis build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![dependency status][david-img]][david-url]
 
@@ -9,7 +9,6 @@
 - Small to download and install.
 - Easy to learn, actually nothing - it is just a simple function.
 - Includes [core-assert][] to provide few modern things down to `0.10`.
-- Promises based - native promise is used on modern, bluebird on `0.10`.
 - No stacktraces. Shows you `err.toString()`, filename, position and the failing line.
 - Backward-compatible with [assertit][]. I'm using it from 1+ year everywhere in my 270+ packages.
 - Support for node 0.10 for next couple of months.
@@ -61,14 +60,13 @@ test(function () {
 
 ## API
 
-### [mukla](index.js#L65)
+### [mukla](index.js#L53)
 > Runs `fn` test and outputs the `name` of the test. If only function is given and it is anonymous, the name of the test is `anonymous`, otherwise the name of the `fn` function.
 
 **Params**
 
 * `name` **{String|Function}**: The name of the test or `fn`.    
-* `[fn]` **{Function=}**: Test function, wrapped in promise.    
-* `returns` **{Promise}**  
+* `[fn]` **{Function=}**: Test function, wrapped in [async-done][], can be 1st argument.    
 
 **Example**
 
@@ -79,12 +77,6 @@ var test = require('mukla')
 test('title of test', function (done) {
   test.strictEqual(1, 2)
   done()
-})
-
-// without need to call `done`
-// with `anonymous` title
-test(function () {
-  test.ok(555)
 })
 
 // ES2015 successful test
@@ -99,22 +91,16 @@ test('should be failing test', () => {
   return Promise.reject(new Error('oooh no!'))
 })
 
-// regular test, returning (promise) another test
-test('old school javascript', function () {
-  test.deepEqual([1, 2, 3], [1, 2, 3]) // pass
-
-  return test('nested?', function (done) {
-    mukla.deepEqual([1, 2, 3], 555)
-    // => throws and shows `nested?` as title, not the other
-    done()
-  })
+// returning failing stream
+test('should be failing test', function () {
+  return fs.createReadStream('foo not exist')
 })
 ```
 
 ## Related
 * [assertit](https://www.npmjs.com/package/assertit): Thin sugar layer on top of `testit` framework, `is-kindof` and `assert`. | [homepage](https://github.com/tunnckoCore/assertit)
 * [limon-prev-next](https://www.npmjs.com/package/limon-prev-next): Plugin for [limon][] pluggable lexer that adds `prev` and `next` methods. | [homepage](https://github.com/limonjs/limon-prev-next)
-* [limon](https://www.npmjs.com/package/limon): The pluggable JavaScript lexer on per character basis. | [homepage](https://github.com/limonjs/limon)
+* [limon](https://www.npmjs.com/package/limon): The pluggable JavaScript lexer. Limon = Lemon. | [homepage](https://github.com/limonjs/limon)
 * [postjson](https://www.npmjs.com/package/postjson): Transforming JSON with plugins. | [homepage](https://github.com/postjson/postjson)
 * [relike](https://www.npmjs.com/package/relike): Simple promisify a callback-style function with sane defaults. Support promisify-ing sync functions. | [homepage](https://github.com/hybridables/relike)
 * [use-ware](https://www.npmjs.com/package/use-ware): Adds sync plugin support to your application. Kinda fork of [use][] -… [more](https://www.npmjs.com/package/use-ware) | [homepage](https://github.com/tunnckocore/use-ware)
@@ -128,10 +114,11 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 
 [![tunnckoCore.tk][author-www-img]][author-www-url] [![keybase tunnckoCore][keybase-img]][keybase-url] [![tunnckoCore npm][author-npm-img]][author-npm-url] [![tunnckoCore twitter][author-twitter-img]][author-twitter-url] [![tunnckoCore github][author-github-img]][author-github-url]
 
-[use]: https://github.com/jonschlinkert/use
 [assertit]: https://github.com/tunnckoCore/assertit
+[async-done]: https://github.com/phated/async-done
 [core-assert]: https://github.com/sindresorhus/core-assert
 [limon]: https://github.com/limonjs/limon
+[use]: https://github.com/jonschlinkert/use
 
 [npmjs-url]: https://www.npmjs.com/package/mukla
 [npmjs-img]: https://img.shields.io/npm/v/mukla.svg?label=mukla

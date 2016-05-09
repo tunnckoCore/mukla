@@ -27,12 +27,6 @@ var stackUtils = new utils.StackUtils()
  *   done()
  * })
  *
- * // without need to call `done`
- * // with `anonymous` title
- * test(function () {
- *   test.ok(555)
- * })
- *
  * // ES2015 successful test
  * // with `anonymous` title
  * test(done => {
@@ -45,21 +39,14 @@ var stackUtils = new utils.StackUtils()
  *   return Promise.reject(new Error('oooh no!'))
  * })
  *
- * // regular test, returning (promise) another test
- * test('old school javascript', function () {
- *   test.deepEqual([1, 2, 3], [1, 2, 3]) // pass
- *
- *   return test('nested?', function (done) {
- *     mukla.deepEqual([1, 2, 3], 555)
- *     // => throws and shows `nested?` as title, not the other
- *     done()
- *   })
+ * // returning failing stream
+ * test('should be failing test', function () {
+ *   return fs.createReadStream('foo not exist')
  * })
  * ```
  *
  * @param  {String|Function} `name` The name of the test or `fn`.
- * @param  {Function=} `[fn]` Test function, wrapped in promise.
- * @return {Promise}
+ * @param  {Function=} `[fn]` Test function, wrapped in [async-done][], can be 1st argument.
  * @api public
  */
 
