@@ -58,9 +58,9 @@ test('should be able to pass "named" tests when `name` and `fn` passed', functio
     })
   }, 1)
   setTimeout(function () {
-    var output = restore(true).trim()
-    test.strictEqual(/foo bar test/.test(output), true)
-    test.strictEqual(/here some assert/.test(output), true)
+    var out = restore(true)
+    test.ok(/here some assert/.test(out.trim()))
+    test.strictEqual(/foo bar test/.test(out.trim()), true)
     done()
   }, 2)
 })

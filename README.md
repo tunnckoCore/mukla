@@ -20,7 +20,7 @@
 
 ## Install
 ```
-npm i mukla --save
+npm i mukla --save-dev
 ```
 
 ## Usage
@@ -60,7 +60,7 @@ test(function () {
 
 ## API
 
-### [mukla](index.js#L53)
+### [mukla](index.js#L54)
 > Runs `fn` test and outputs the `name` of the test. If only function is given and it is anonymous, the name of the test is `anonymous`, otherwise the name of the `fn` function.
 
 **Params**
