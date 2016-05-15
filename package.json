@@ -62,11 +62,25 @@
   "verb": {
     "reflinks": [
       "assertit",
+      "async-done",
       "core-assert",
       "limon",
       "use",
-      "async-done"
+      "relike"
     ],
+    "related": {
+      "list": [
+        "assertit",
+        "letta",
+        "limon",
+        "limon-prev-next",
+        "postjson",
+        "relike",
+        "relike-all",
+        "use",
+        "use-ware"
+      ]
+    },
     "run": true,
     "toc": false,
     "layout": "empty",
@@ -75,17 +89,6 @@
     },
     "tasks": [
       "readme"
-    ],
-    "related": {
-      "list": [
-        "assertit",
-        "limon",
-        "limon-prev-next",
-        "postjson",
-        "relike",
-        "use",
-        "use-ware"
-      ]
-    }
+    ]
   }
 }

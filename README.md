@@ -29,6 +29,7 @@ npm i mukla --save-dev
 ### ES2015 way
 
 ```js
+import fs from 'fs'
 import test from 'mukla'
 
 test(done => {
@@ -36,15 +37,17 @@ test(done => {
   done()
 })
 
-// or without `done`
+// or without `done`, returning Promise
+// stream, observerable and so on
 test(() => {
-  test.strictEqual(1, 2) // failing
+  return fs.createReadStream('not exist') // failing test
 })
 ```
 
 ### The old way
 
 ```js
+var fs = require('fs')
 var test = require('mukla')
 
 test(function (done) {
@@ -54,13 +57,13 @@ test(function (done) {
 
 // or without `done`
 test(function () {
-  test.strictEqual(1, 2) // failing
+  return fs.createReadStream('not exists') // failing
 })
 ```
 
 ## API
 
-### [mukla](index.js#L54)
+### [mukla](index.js#L55)
 > Runs `fn` test and outputs the `name` of the test. If only function is given and it is anonymous, the name of the test is `anonymous`, otherwise the name of the `fn` function.
 
 **Params**
@@ -99,10 +102,12 @@ test('should be failing test', function () {
 
 ## Related
 * [assertit](https://www.npmjs.com/package/assertit): Thin sugar layer on top of `testit` framework, `is-kindof` and `assert`. | [homepage](https://github.com/tunnckoCore/assertit)
+* [letta](https://www.npmjs.com/package/letta): Promisify sync, async or generator function, using [relike][]. Kind of promisify, but… [more](https://www.npmjs.com/package/letta) | [homepage](https://github.com/hybridables/letta)
 * [limon-prev-next](https://www.npmjs.com/package/limon-prev-next): Plugin for [limon][] pluggable lexer that adds `prev` and `next` methods. | [homepage](https://github.com/limonjs/limon-prev-next)
 * [limon](https://www.npmjs.com/package/limon): The pluggable JavaScript lexer. Limon = Lemon. | [homepage](https://github.com/limonjs/limon)
 * [postjson](https://www.npmjs.com/package/postjson): Transforming JSON with plugins. | [homepage](https://github.com/postjson/postjson)
-* [relike](https://www.npmjs.com/package/relike): Simple promisify a callback-style function with sane defaults. Support promisify-ing sync functions. | [homepage](https://github.com/hybridables/relike)
+* [relike-all](https://www.npmjs.com/package/relike-all): Promisify all functions in an object, using `relike`. | [homepage](https://github.com/hybridables/relike-all)
+* [relike](https://www.npmjs.com/package/relike): Simple promisify async or sync function with sane defaults. Lower level than… [more](https://www.npmjs.com/package/relike) | [homepage](https://github.com/hybridables/relike)
 * [use-ware](https://www.npmjs.com/package/use-ware): Adds sync plugin support to your application. Kinda fork of [use][] -… [more](https://www.npmjs.com/package/use-ware) | [homepage](https://github.com/tunnckocore/use-ware)
 * [use](https://www.npmjs.com/package/use): Easily add plugin support to your node.js application. | [homepage](https://github.com/jonschlinkert/use)
 
@@ -118,6 +123,7 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 [async-done]: https://github.com/phated/async-done
 [core-assert]: https://github.com/sindresorhus/core-assert
 [limon]: https://github.com/limonjs/limon
+[relike]: https://github.com/hybridables/relike
 [use]: https://github.com/jonschlinkert/use
 
 [npmjs-url]: https://www.npmjs.com/package/mukla
