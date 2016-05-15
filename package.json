@@ -1,6 +1,6 @@
 {
   "name": "mukla",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Simple and fast test runner based on [async-done][] - so, works with callbacks, promises, observables, child processes and streams. Shows meaningful output on fail and support for custom reporters.",
   "repository": "tunnckoCore/mukla",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
