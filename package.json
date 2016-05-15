@@ -1,7 +1,7 @@
 {
   "name": "mukla",
   "version": "0.4.2",
-  "description": "Simple and fast test runner with basic reporter and clean stacktraces. Support custom reporters and async functions. Using [async-done][] under the hood.",
+  "description": "Simple and fast test runner based on [async-done][] - so, works with callbacks, promises, observables, child processes and streams. Shows meaningful output on fail and support for custom reporters.",
   "repository": "tunnckoCore/mukla",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
   "precommit.silent": true,
@@ -62,25 +62,11 @@
   "verb": {
     "reflinks": [
       "assertit",
-      "async-done",
       "core-assert",
       "limon",
       "use",
-      "relike"
+      "async-done"
     ],
-    "related": {
-      "list": [
-        "assertit",
-        "letta",
-        "limon",
-        "limon-prev-next",
-        "postjson",
-        "relike",
-        "relike-all",
-        "use",
-        "use-ware"
-      ]
-    },
     "run": true,
     "toc": false,
     "layout": "empty",
@@ -89,6 +75,17 @@
     },
     "tasks": [
       "readme"
-    ]
+    ],
+    "related": {
+      "list": [
+        "assertit",
+        "limon",
+        "limon-prev-next",
+        "postjson",
+        "relike",
+        "use",
+        "use-ware"
+      ]
+    }
   }
 }

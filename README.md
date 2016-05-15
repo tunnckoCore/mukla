@@ -1,6 +1,6 @@
 # [mukla][author-www-url] [![npmjs.com][npmjs-img]][npmjs-url] [![The MIT License][license-img]][license-url] [![npm downloads][downloads-img]][downloads-url] 
 
-> Simple and fast test runner with basic reporter and clean stacktraces. Support custom reporters and async functions. Using [async-done][] under the hood.
+> Simple and fast test runner based on [async-done][] - so, works with callbacks, promises, observables, child processes and streams. Shows meaningful output on fail and support for custom reporters.
 
 [![code climate][codeclimate-img]][codeclimate-url] [![standard code style][standard-img]][standard-url] [![travis build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![dependency status][david-img]][david-url]
 
@@ -102,11 +102,9 @@ test('should be failing test', function () {
 
 ## Related
 * [assertit](https://www.npmjs.com/package/assertit): Thin sugar layer on top of `testit` framework, `is-kindof` and `assert`. | [homepage](https://github.com/tunnckoCore/assertit)
-* [letta](https://www.npmjs.com/package/letta): Promisify sync, async or generator function, using [relike][]. Kind of promisify, but… [more](https://www.npmjs.com/package/letta) | [homepage](https://github.com/hybridables/letta)
 * [limon-prev-next](https://www.npmjs.com/package/limon-prev-next): Plugin for [limon][] pluggable lexer that adds `prev` and `next` methods. | [homepage](https://github.com/limonjs/limon-prev-next)
 * [limon](https://www.npmjs.com/package/limon): The pluggable JavaScript lexer. Limon = Lemon. | [homepage](https://github.com/limonjs/limon)
 * [postjson](https://www.npmjs.com/package/postjson): Transforming JSON with plugins. | [homepage](https://github.com/postjson/postjson)
-* [relike-all](https://www.npmjs.com/package/relike-all): Promisify all functions in an object, using `relike`. | [homepage](https://github.com/hybridables/relike-all)
 * [relike](https://www.npmjs.com/package/relike): Simple promisify async or sync function with sane defaults. Lower level than… [more](https://www.npmjs.com/package/relike) | [homepage](https://github.com/hybridables/relike)
 * [use-ware](https://www.npmjs.com/package/use-ware): Adds sync plugin support to your application. Kinda fork of [use][] -… [more](https://www.npmjs.com/package/use-ware) | [homepage](https://github.com/tunnckocore/use-ware)
 * [use](https://www.npmjs.com/package/use): Easily add plugin support to your node.js application. | [homepage](https://github.com/jonschlinkert/use)
@@ -123,7 +121,6 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 [async-done]: https://github.com/phated/async-done
 [core-assert]: https://github.com/sindresorhus/core-assert
 [limon]: https://github.com/limonjs/limon
-[relike]: https://github.com/hybridables/relike
 [use]: https://github.com/jonschlinkert/use
 
 [npmjs-url]: https://www.npmjs.com/package/mukla
