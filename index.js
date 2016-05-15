@@ -8,6 +8,7 @@
 'use strict'
 
 var exit = process.exit
+var util = require('util')
 var utils = require('./utils')
 var stackUtils = new utils.StackUtils()
 
@@ -120,8 +121,12 @@ mukla.onFailure = function onFailure (name, fn) {
     console.error('', err.toString())
     console.error('       at:', stack.slice(0, newline))
 
-    if (err.actual) console.error('   actual:', err.actual)
-    if (err.expected) console.error(' expected:', err.expected)
+    if (utils.hasOwn(err, 'actual')) {
+      console.error('   actual:', util.inspect(err.actual))
+    }
+    if (utils.hasOwn(err, 'expected')) {
+      console.error(' expected:', util.inspect(err.expected))
+    }
 
     console.error(' ---')
     exit(1)

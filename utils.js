@@ -38,6 +38,10 @@ require('success-symbol')
 
 require = fn // eslint-disable-line no-undef, no-native-reassign
 
+utils.hasOwn = function hasOwn (self, key) {
+  return Object.prototype.hasOwnProperty.call(self, key)
+}
+
 /**
  * Expose `utils` modules
  */
