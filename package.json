@@ -62,10 +62,13 @@
   "verb": {
     "reflinks": [
       "assertit",
+      "async-done",
       "core-assert",
       "limon",
       "use",
-      "async-done"
+      "testit",
+      "mocha",
+      "co-mocha"
     ],
     "run": true,
     "toc": false,

@@ -4,19 +4,31 @@
 
 [![code climate][codeclimate-img]][codeclimate-url] [![standard code style][standard-img]][standard-url] [![travis build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![dependency status][david-img]][david-url]
 
-## Features / Main Points
-- Lightweight, simple and fast.
-- Small to download and install.
-- Easy to learn, actually nothing - it is just a simple function.
-- Includes [core-assert][] to provide few modern things down to `0.10`.
-- No stacktraces. Shows you `err.toString()`, filename, position and the failing line.
-- Backward-compatible with [assertit][]. I'm using it from 1+ year everywhere in my 270+ packages.
-- Support for node 0.10 for next couple of months.
-- Support for custom reporters - it just emits two events: `pass` and `fail`.
-  + Reporeter should be just event emitter.
-  + One simple built-in reporter.
-- "Fail-first", meaining it stops after the first failing test.
-  + Not wanted, but with that design that's all we can do.
+## Hightlights
+
+- Extremely lightweight and fast
+- Small to download and install
+- No implicit globals
+- Powered by [async-done][], currently
+- Enforces writing atomic tests
+- Simple test syntax - just a single `test()` function
+- Runs tests in parallel - they even are not ordered
+- Works seamlessly with istanbul for code coverage
+- Stops after the first failing test (_"bail"_)
+- Built-in [core-assert][] assertion library
+- Support `node@0.10` for the next few months
+- Backward-compatible with [assertit][] and so [testit][]
+- Easy to port [mocha][] and [co-mocha][] tests
+- [No stack traces](#no-stack-traces)
+- [Regular callback support](#regular-callback-support)
+- [Async function support](#async-function-support)
+- [Generator function support](#generator-function-support)
+- [Promise support](#promise-support)
+- [Observable support](#observable-support)
+- [Stream and Child Process support](#stream-and-child-process-support)
+- [Custom reporters support](#custom-reporters-support)
+- [Meaningful output on failing test](#meaningful-output-on-failing-test)
+- more... ?
 
 ## Install
 ```
@@ -117,8 +129,11 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 
 [![tunnckoCore.tk][author-www-img]][author-www-url] [![keybase tunnckoCore][keybase-img]][keybase-url] [![tunnckoCore npm][author-npm-img]][author-npm-url] [![tunnckoCore twitter][author-twitter-img]][author-twitter-url] [![tunnckoCore github][author-github-img]][author-github-url]
 
+[mocha]: https://github.com/mochajs/mocha
+[testit]: https://github.com/ForbesLindesay/testit
+[co-mocha]: https://github.com/blakeembrey/co-mocha
 [assertit]: https://github.com/tunnckoCore/assertit
-[async-done]: https://github.com/phated/async-done
+[async-done]: https://github.com/gulpjs/async-done
 [core-assert]: https://github.com/sindresorhus/core-assert
 [limon]: https://github.com/limonjs/limon
 [use]: https://github.com/jonschlinkert/use
