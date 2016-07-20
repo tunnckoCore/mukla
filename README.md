@@ -113,13 +113,13 @@ test('should be failing test', function () {
 ```
 
 ## Related
-* [assertit](https://www.npmjs.com/package/assertit): Thin sugar layer on top of `testit` framework, `is-kindof` and `assert`. | [homepage](https://github.com/tunnckoCore/assertit)
-* [limon-prev-next](https://www.npmjs.com/package/limon-prev-next): Plugin for [limon][] pluggable lexer that adds `prev` and `next` methods. | [homepage](https://github.com/limonjs/limon-prev-next)
-* [limon](https://www.npmjs.com/package/limon): The pluggable JavaScript lexer. Limon = Lemon. | [homepage](https://github.com/limonjs/limon)
-* [postjson](https://www.npmjs.com/package/postjson): Transforming JSON with plugins. | [homepage](https://github.com/postjson/postjson)
-* [relike](https://www.npmjs.com/package/relike): Simple promisify async or sync function with sane defaults. Lower level than… [more](https://www.npmjs.com/package/relike) | [homepage](https://github.com/hybridables/relike)
-* [use-ware](https://www.npmjs.com/package/use-ware): Adds sync plugin support to your application. Kinda fork of [use][] -… [more](https://www.npmjs.com/package/use-ware) | [homepage](https://github.com/tunnckocore/use-ware)
-* [use](https://www.npmjs.com/package/use): Easily add plugin support to your node.js application. | [homepage](https://github.com/jonschlinkert/use)
+- [assertit](https://www.npmjs.com/package/assertit): Thin sugar layer on top of `testit` framework, `is-kindof` and `assert`. | [homepage](https://github.com/tunnckoCore/assertit "Thin sugar layer on top of `testit` framework, `is-kindof` and `assert`.")
+- [limon-prev-next](https://www.npmjs.com/package/limon-prev-next): Plugin for [limon][] pluggable lexer that adds `prev` and `next` methods. | [homepage](https://github.com/limonjs/limon-prev-next "Plugin for [limon][] pluggable lexer that adds `prev` and `next` methods.")
+- [limon](https://www.npmjs.com/package/limon): The pluggable JavaScript lexer. Limon = Lemon. | [homepage](https://github.com/limonjs/limon "The pluggable JavaScript lexer. Limon = Lemon.")
+- [postjson](https://www.npmjs.com/package/postjson): Transforming JSON with plugins. | [homepage](https://github.com/postjson/postjson "Transforming JSON with plugins.")
+- [relike](https://www.npmjs.com/package/relike): Simple promisify async or sync function with sane defaults. Lower level than… [more](https://github.com/hybridables/relike) | [homepage](https://github.com/hybridables/relike "Simple promisify async or sync function with sane defaults. Lower level than `promisify` thing. Can be used to create `promisify` method.")
+- [use-ware](https://www.npmjs.com/package/use-ware): Adds sync plugin support to your application. Kinda fork of [use… [more](https://github.com/tunnckocore/use-ware) | [homepage](https://github.com/tunnckocore/use-ware "Adds sync plugin support to your application. Kinda fork of [use][] - use it if you need to support nesting. Or use [ware][] if you need async middleware system.")
+- [use](https://www.npmjs.com/package/use): Easily add plugin support to your node.js application. | [homepage](https://github.com/jonschlinkert/use "Easily add plugin support to your node.js application.")
 
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/tunnckoCore/mukla/issues/new).  
@@ -129,13 +129,13 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 
 [![tunnckoCore.tk][author-www-img]][author-www-url] [![keybase tunnckoCore][keybase-img]][keybase-url] [![tunnckoCore npm][author-npm-img]][author-npm-url] [![tunnckoCore twitter][author-twitter-img]][author-twitter-url] [![tunnckoCore github][author-github-img]][author-github-url]
 
-[mocha]: https://github.com/mochajs/mocha
-[testit]: https://github.com/ForbesLindesay/testit
-[co-mocha]: https://github.com/blakeembrey/co-mocha
 [assertit]: https://github.com/tunnckoCore/assertit
 [async-done]: https://github.com/gulpjs/async-done
+[co-mocha]: https://github.com/blakeembrey/co-mocha
 [core-assert]: https://github.com/sindresorhus/core-assert
 [limon]: https://github.com/limonjs/limon
+[mocha]: https://github.com/mochajs/mocha
+[testit]: https://github.com/ForbesLindesay/testit
 [use]: https://github.com/jonschlinkert/use
 
 [npmjs-url]: https://www.npmjs.com/package/mukla
