@@ -1,19 +1,29 @@
 {
   "name": "mukla",
   "version": "0.4.5",
-  "description": "Simple and fast test runner based on [async-done][] - so, works with callbacks, promises, observables, child processes and streams. Shows meaningful output on fail and support for custom reporters.",
+  "description": "Small, parallel and fast test framework with suppport for async/await, promises, callbacks, streams and observables. Targets and works at node.js v0.10 and above.",
   "repository": "tunnckoCore/mukla",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
   "precommit.silent": true,
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "standard && node test.js"
+    "lint": "standard --verbose",
+    "pretest": "npm run lint",
+    "test": "npm run coverage",
+    "posttest": "npm run lint:coverage",
+    "coverage": "nyc node test.js",
+    "lint:coverage": "nyc check-coverage --lines 0 --branches 0 --statements 0 --functions 0",
+    "report-coverage": "nyc report --reporter=text-lcov | coveralls",
+    "prerelease": "npm test",
+    "release": "standard-version --sign --no-verify",
+    "precommit": "git add --all",
+    "commit": "git-cz"
   },
   "dependencies": {
     "always-done": "^1.1.0",
-    "clean-stack": "^1.1.0",
-    "core-assert": "^0.2.0",
+    "clean-stacktrace": "^1.0.0",
+    "core-assert": "^0.2.1",
     "error-symbol": "^0.1.0",
     "extend-shallow": "^2.0.1",
     "get-fn-name": "^1.0.0",
@@ -23,72 +33,33 @@
   "devDependencies": {
     "assertit": "^0.1.0",
     "capture-stream": "^0.1.2",
-    "pre-commit": "*"
+    "commitizen": "~2.7.0",
+    "coveralls": "^2.11.14",
+    "cz-conventional-changelog": "^1.2.0",
+    "nyc": "^8.3.2",
+    "pre-commit": "^1.1.3",
+    "standard": "^8.5.0",
+    "standard-version": "^3.0.0"
   },
   "files": [
     "index.js",
     "utils.js"
   ],
-  "keywords": [
-    "assert",
-    "async",
-    "asynchronous",
-    "await",
-    "core",
-    "easy",
-    "es",
-    "fast",
-    "fn",
-    "framework",
-    "function",
-    "gen",
-    "generator",
-    "generators",
-    "mukla",
-    "observerable",
-    "promise",
-    "promises",
-    "reporters",
-    "runner",
-    "simple",
-    "small",
-    "sync",
-    "synchronous",
-    "tdd",
-    "test",
-    "testing",
-    "word"
-  ],
+  "keywords": [],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "verb": {
-    "reflinks": [
-      "assertit",
-      "async-done",
-      "core-assert",
-      "limon",
-      "use",
-      "testit",
-      "mocha",
-      "co-mocha"
-    ],
     "run": true,
-    "toc": false,
+    "toc": true,
     "layout": "empty",
-    "lint": {
-      "reflinks": true
-    },
     "tasks": [
       "readme"
     ],
-    "related": {
-      "list": [
-        "assertit",
-        "limon",
-        "limon-prev-next",
-        "postjson",
-        "relike",
-        "use",
-        "use-ware"
-      ]
+    "lint": {
+      "reflinks": true
     }
   }
 }

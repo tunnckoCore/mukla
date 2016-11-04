@@ -1,24 +1,8 @@
 'use strict'
 
-/**
- * Module dependencies
- */
-
-var util = require('util')
 var path = require('path')
+var util = require('util')
 var utils = require('lazy-cache')(require)
-
-/**
- * Temporarily re-assign `require` to trick browserify and
- * webpack into reconizing lazy dependencies.
- *
- * This tiny bit of ugliness has the huge dual advantage of
- * only loading modules that are actually called at some
- * point in the lifecycle of the application, whilst also
- * allowing browserify and webpack to find modules that
- * are depended on but never actually called.
- */
-
 var fn = require
 require = utils // eslint-disable-line no-undef, no-native-reassign, no-global-assign
 
@@ -27,17 +11,12 @@ require = utils // eslint-disable-line no-undef, no-native-reassign, no-global-a
  */
 
 require('always-done')
+require('clean-stacktrace')
 require('core-assert')
-require('clean-stack')
 require('error-symbol')
 require('extend-shallow')
 require('get-fn-name')
 require('success-symbol')
-
-/**
- * Restore `require`
- */
-
 require = fn // eslint-disable-line no-undef, no-native-reassign, no-global-assign
 
 utils.hasOwn = function hasOwn (self, key) {
