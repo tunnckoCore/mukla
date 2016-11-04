@@ -8,9 +8,7 @@
 'use strict'
 
 var exit = process.exit
-var util = require('util')
 var utils = require('./utils')
-var stackUtils = new utils.StackUtils()
 
 /**
  * > Runs `fn` test and outputs the `name` of the test.
@@ -52,7 +50,7 @@ var stackUtils = new utils.StackUtils()
  * @api public
  */
 
-var mukla = module.exports = function mukla (name, fn) {
+var mukla = module.exports = function mukla (name, fn, showStack) {
   if (typeof name === 'function') {
     fn = name
     name = null
@@ -64,8 +62,10 @@ var mukla = module.exports = function mukla (name, fn) {
   mukla.emit = mukla.reporter && mukla.reporter.emit || null
   mukla.emit = typeof mukla.emit === 'function' ? mukla.emit : null
 
-  utils.asyncDone(fn.bind(this || mukla.context), function (err, res) {
-    if (err) return mukla.onFailure(name, fn)(err)
+  utils.alwaysDone(fn, {
+    context: this
+  }, function (err, res) {
+    if (err) return mukla.onFailure(name, fn)(err, showStack)
     mukla.onSuccess(name, fn)()
   })
 }
@@ -108,27 +108,14 @@ mukla.onSuccess = function onSuccess (name, fn) {
 
 mukla.onFailure = function onFailure (name, fn) {
   /* istanbul ignore next */
-  return function fail (err) {
+  return function fail (err, showStack) {
     if (mukla.emit) {
       mukla.emit('fail', err, name, fn)
       return
     }
-    var stack = stackUtils.clean(err.stack)
-    var newline = stack.indexOf('\n')
 
     console.error('', utils.errorSymbol, name)
-    console.error(' ---')
-    console.error('', err.toString())
-    console.error('       at:', stack.slice(0, newline))
-
-    if (utils.hasOwn(err, 'actual')) {
-      console.error('   actual:', util.inspect(err.actual))
-    }
-    if (utils.hasOwn(err, 'expected')) {
-      console.error(' expected:', util.inspect(err.expected))
-    }
-
-    console.error(' ---')
+    console.error(utils.diag(err, showStack))
     exit(1)
   }
 }

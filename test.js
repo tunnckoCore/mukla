@@ -64,3 +64,23 @@ test('should be able to pass "named" tests when `name` and `fn` passed', functio
     done()
   }, 2)
 })
+
+// works but architecture not allows cool and easy handling
+//
+// var path = require('path')
+// test('should create TAP-compliant error outputs', function (done) {
+//   var restore = capture(process.stdout)
+//   setTimeout(function () {
+//     mukla('foo bar test', function someMuklaTest (cb) {
+//       path.resolve(123)
+//       cb()
+//     }/* , true */) // pass `true` as third argument to print stack traces
+//   }, 1)
+//   setTimeout(function () {
+//     var out = restore(true)
+//     test.ok(/name: TypeError/.test(out))
+//     test.ok(/message: Path must be a string/.test(out))
+//     test.ok(/at: Function\.someMuklaTest/.test(out))
+//     done()
+//   }, 2)
+// })
