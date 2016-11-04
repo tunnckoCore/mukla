@@ -45,8 +45,9 @@ var utils = require('./utils')
  * })
  * ```
  *
- * @param  {String|Function} `name` The name of the test or `fn`.
- * @param  {Function=} `[fn]` Test function, wrapped in [async-done][], can be 1st argument.
+ * @param  {String|Function} `name` the title of the test or `fn`
+ * @param  {Function} `[fn]` test function, wrapped in [always-done][]
+ * @param  {Boolean} `showStack` if boolean `true`, will print stack when has error
  * @api public
  */
 
