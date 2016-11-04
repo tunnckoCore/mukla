@@ -33,7 +33,7 @@ utils.diag = function diagnostic (err, showStack) {
 
   // ensure stack exists
   var stack = err.stack && err.stack.length
-    ? utils.cleanStack(err.stack)
+    ? utils.cleanStacktrace(err.stack)
     : null
 
   // modify the cleaned up stacktrace if exist
