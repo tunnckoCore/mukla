@@ -97,6 +97,18 @@
     ],
     "lint": {
       "reflinks": true
-    }
+    },
+    "related": {
+      "list": []
+    },
+    "reflinks": [
+      "always-done",
+      "assertit",
+      "clean-stacktrace",
+      "core-assert",
+      "istanbul",
+      "mocha",
+      "testit"
+    ]
   }
 }

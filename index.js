@@ -21,27 +21,16 @@ var utils = require('./utils')
  * ```js
  * var test = require('mukla')
  *
- * // regular failing test
+ * // failing regular callbacks test
  * test('title of test', function (done) {
  *   test.strictEqual(1, 2)
  *   done()
  * })
  *
- * // ES2015 successful test
- * // with `anonymous` title
- * test(done => {
- *   test.strictEqual(1, 1)
+ * // passing test with anonymous title
+ * test(function (done) {
+ *   test.strictEqual(222, 222)
  *   done()
- * })
- *
- * // returning rejected promise
- * test('should be failing test', () => {
- *   return Promise.reject(new Error('oooh no!'))
- * })
- *
- * // returning failing stream
- * test('should be failing test', function () {
- *   return fs.createReadStream('foo not exist')
  * })
  * ```
  *

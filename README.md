@@ -4,6 +4,25 @@
 
 [![code climate][codeclimate-img]][codeclimate-url] [![standard code style][standard-img]][standard-url] [![travis build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![dependency status][david-img]][david-url]
 
+## Hightlights
+- Extremely lightweight and fast
+- Small to download and install
+- No implicit globals,
+- No CLI, use plain `node test.js`
+- Powered by [always-done][]
+- And so supports async/await, promises, observables streams and callbacks
+- Enforces writing atomic tests
+- Simple test syntax - just a single `test()` function
+- Works seamlessly with [istanbul][] for code coverage
+- Stops after first failing test (also known as _"fail fast"_ or _"bail"_)
+- Built-in [core-assert][] assertion library
+- Targets and works at node.js v0.10 and above
+- No need for build/transpilation/compilation step
+- Backward-compatible with [assertit][] and so [testit][]
+- Easy to porting of [mocha][]-style tests
+- Clean stack traces using [clean-stacktrace][], disabled by default
+- Custom reporters, one built-in
+
 ## Install
 > Install with [npm](https://www.npmjs.com/)
 
@@ -52,7 +71,7 @@ test(function () {
 
 ## API
 
-### [mukla](index.js#L54)
+### [mukla](index.js#L43)
 > Runs `fn` test and outputs the `name` of the test. If only function is given and it is anonymous, the name of the test is `anonymous`, otherwise the name of the `fn` function.
 
 **Params**
@@ -66,27 +85,16 @@ test(function () {
 ```js
 var test = require('mukla')
 
-// regular failing test
+// failing regular callbacks test
 test('title of test', function (done) {
   test.strictEqual(1, 2)
   done()
 })
 
-// ES2015 successful test
-// with `anonymous` title
-test(done => {
-  test.strictEqual(1, 1)
+// passing test with anonymous title
+test(function (done) {
+  test.strictEqual(222, 222)
   done()
-})
-
-// returning rejected promise
-test('should be failing test', () => {
-  return Promise.reject(new Error('oooh no!'))
-})
-
-// returning failing stream
-test('should be failing test', function () {
-  return fs.createReadStream('foo not exist')
 })
 ```
 
@@ -144,3 +152,9 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 [new-message-img]: https://img.shields.io/badge/ask%20me-anything-green.svg
 
 [always-done]: https://github.com/hybridables/always-done
+[assertit]: https://github.com/tunnckoCore/assertit
+[clean-stacktrace]: https://github.com/tunnckocore/clean-stacktrace
+[core-assert]: https://github.com/sindresorhus/core-assert
+[istanbul]: https://github.com/gotwarlost/istanbul
+[mocha]: https://mochajs.org
+[testit]: https://github.com/ForbesLindesay/testit
