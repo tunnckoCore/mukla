@@ -14,8 +14,40 @@ $ npm i mukla --save
 ## Usage
 > For more use-cases see the [tests](./test.js)
 
+### ES2015 way
+
 ```js
-const mukla = require('mukla')
+import fs from 'fs'
+import test from 'mukla'
+
+test(done => {
+  test.deepEqual([1, 2], [1, 2]) // passing
+  done()
+})
+
+// or without `done`, returning Promise
+// stream, observerable and so on
+test(() => {
+  return fs.createReadStream('not exist') // failing test
+})
+```
+
+### The old way
+
+```js
+var fs = require('fs')
+var test = require('mukla')
+
+test(function (done) {
+  test.deepEqual([1, 2], [1, 2]) // passing
+  done()
+})
+
+// or without `done`, returning Promise
+// stream, observerable and so on
+test(function () {
+  return fs.createReadStream('not exists') // failing
+})
 ```
 
 ## API
