@@ -90,7 +90,11 @@
   },
   "verb": {
     "run": true,
-    "toc": true,
+    "toc": {
+      "render": true,
+      "method": "preWrite",
+      "maxdepth": 3
+    },
     "layout": "empty",
     "tasks": [
       "readme"
@@ -108,7 +112,10 @@
       "core-assert",
       "istanbul",
       "mocha",
-      "testit"
+      "testit",
+      "end-of-stream",
+      "on-stream-end",
+      "stream-exhaust"
     ]
   }
 }

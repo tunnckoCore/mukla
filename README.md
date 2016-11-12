@@ -23,6 +23,24 @@
 - Clean stack traces using [clean-stacktrace][], disabled by default
 - Custom reporters, one built-in
 
+## Table of Contents
+- [Install](#install)
+- [Usage](#usage)
+  * [Write tests in ES2015](#write-tests-in-es2015)
+  * [The old way](#the-old-way)
+- [API](#api)
+  * [mukla](#mukla)
+- [Supports](#supports)
+  * [Async/await function support](#asyncawait-function-support)
+  * [Promise support](#promise-support)
+  * [Observable support](#observable-support)
+  * [Regular callbacks support](#regular-callbacks-support)
+  * [Synchronous functions support](#synchronous-functions-support)
+  * [Support functions that returns streams](#support-functions-that-returns-streams)
+  * [Support functions that returns Child Process](#support-functions-that-returns-child-process)
+  * [Handles any errors](#handles-any-errors)
+- [Contributing](#contributing)
+
 ## Install
 > Install with [npm](https://www.npmjs.com/)
 
@@ -33,7 +51,7 @@ $ npm i mukla --save
 ## Usage
 > For more use-cases see the [tests](./test.js)
 
-### ES2015 way
+### Write tests in ES2015
 
 ```js
 import fs from 'fs'
@@ -98,6 +116,232 @@ test(function (done) {
 })
 ```
 
+## Supports
+> Handles completion and errors of async/await, synchronous and asynchronous (callback) functions, also tests that returns streams, promises, child process and observables.
+
+### Async/await function support
+
+```js
+var test = require('mukla')
+
+test('passing modern test', async function () {
+  return await Promise.resolve('foobar')
+})
+```
+
+**[back to top](#readme)**
+
+### Promise support
+
+#### Returning a resolved Promise
+
+```js
+var test = require('mukla')
+
+test('passing promise test', function () {
+  return Promise.resolve(12345)
+})
+```
+
+#### Returning a rejected Promise
+
+```js
+var test = require('mukla')
+
+test('failing test with promise', function () {
+  return Promise.reject(new Error('foo bar'))
+})
+```
+
+**[back to top](#readme)**
+
+### Observable support
+> Using `.subscribe` method of the observable
+
+#### Empty observable
+```js
+var test = require('mukla')
+var Observable = require('rx').Observable
+
+test('passing test with empty observable', function () {
+  return Observable.empty()
+})
+```
+
+#### Successful test wtih observable
+
+```js
+var test = require('mukla')
+var Observable = require('rx').Observable
+
+alwaysDone(function () {
+  return Observable.return([1, 2, 3])
+})
+```
+
+#### Failing observable
+
+```js
+var test = require('mukla')
+var Observable = require('rx').Observable
+
+test(function () {
+  return Observable.throw(new Error('observable error'))
+})
+```
+
+**[back to top](#readme)**
+
+### Regular callbacks support
+
+```js
+var test = require('mukla')
+var fs = require('fs')
+
+test('some callback test', function (done) {
+  fs.readFile('./package.json', 'utf8', function (err, res) {
+    test.strictEqual(err, null)
+    test.strictEqual(typeof res, 'string')
+    test.strictEqual(res.length > 0, true)
+    done()
+  })
+})
+```
+
+**[back to top](#readme)**
+
+### Synchronous functions support
+
+#### Passing sync test
+
+```js
+var fs = require('fs')
+var test = require('mukla')
+
+test(function () {
+  var res = fs.readFileSync('./package.json')
+  test.strictEqual(typeof res, 'string')
+})
+```
+
+#### Failing test with title
+
+```js
+var test = require('mukla')
+
+test('some failing test', function () {
+  JSON.parse('{Sjkfsf:"dfgfg')
+})
+```
+
+**[back to top](#readme)**
+
+### Support functions that returns streams
+> Handles completion of tests using [on-stream-end][] and [stream-exhaust][], behind the scenes, using [always-done][]
+
+#### Passing test with unpiped streams
+
+```js
+var fs = require('fs')
+var test = require('mukla')
+
+test(function () {
+  return fs.createReadStream('./package.json')
+})
+```
+
+#### Failing test unpiped streams
+
+```js
+var fs = require('fs')
+var test = require('mukla')
+
+test('failing stream test', function () {
+  return fs.createReadStream('foo bar')
+})
+```
+
+#### Failing test with piped streams
+
+```js
+var fs = require('fs')
+var test = require('mukla')
+var through2 = require('through2')
+
+test(function () {
+  var read = fs.createReadStream('foo bar')
+  return read.pipe(through2())
+})
+```
+
+**[back to top](#readme)**
+
+### Support functions that returns Child Process
+> Basically, they are streams, so completion is handled using [on-stream-end][] which is drop-in replacement for [end-of-stream][]
+
+#### Successful exec
+
+```js
+var test = require('mukla')
+var cp = require('child_process')
+var isChildProcess = require('is-child-process')
+
+test('returning child processes', function () {
+  var proc = cp.exec('echo hello world')
+  test.strictEqual(isChildProcess(proc), true)
+  return proc
+})
+```
+
+#### Failing exec
+
+```js
+var test = require('mukla')
+var cp = require('child_process')
+
+test('should be failing exec test', function () {
+  return cp.exec('foo-bar-baz sasa')
+})
+```
+
+#### Failing spawn
+
+```js
+var test = require('mukla')
+var cp = require('child_process')
+
+test('failing child process spawn test', function () {
+  return cp.spawn('foo-bar-baz', ['hello world'])
+})
+```
+
+**[back to top](#readme)**
+
+### Handles any errors
+
+#### uncaught exceptions
+
+```js
+var test = require('mukla')
+
+test('should be failing test with ReferenceError', function () {
+  foo // ReferenceError
+  return 55
+})
+```
+
+#### if test throws
+
+```js
+var test = require('mukla')
+
+test('failing test with SyntaxError', function () {
+  JSON.parse('{"foo":')
+})
+```
+
+**[back to top](#readme)**
+
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/tunnckoCore/mukla/issues/new).  
 But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines.
@@ -105,6 +349,17 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 ## [Charlike Make Reagent](http://j.mp/1stW47C) [![new message to charlike][new-message-img]][new-message-url] [![freenode #charlike][freenode-img]][freenode-url]
 
 [![tunnckoCore.tk][author-www-img]][author-www-url] [![keybase tunnckoCore][keybase-img]][keybase-url] [![tunnckoCore npm][author-npm-img]][author-npm-url] [![tunnckoCore twitter][author-twitter-img]][author-twitter-url] [![tunnckoCore github][author-github-img]][author-github-url]
+
+[always-done]: https://github.com/hybridables/always-done
+[assertit]: https://github.com/tunnckoCore/assertit
+[clean-stacktrace]: https://github.com/tunnckocore/clean-stacktrace
+[core-assert]: https://github.com/sindresorhus/core-assert
+[end-of-stream]: https://github.com/mafintosh/end-of-stream
+[istanbul]: https://github.com/gotwarlost/istanbul
+[mocha]: https://mochajs.org
+[on-stream-end]: https://github.com/tunnckocore/on-stream-end
+[stream-exhaust]: https://github.com/chrisdickinson/stream-exhaust.git
+[testit]: https://github.com/ForbesLindesay/testit
 
 [npmjs-url]: https://www.npmjs.com/package/mukla
 [npmjs-img]: https://img.shields.io/npm/v/mukla.svg?label=mukla
@@ -151,10 +406,3 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 [new-message-url]: https://github.com/tunnckoCore/ama
 [new-message-img]: https://img.shields.io/badge/ask%20me-anything-green.svg
 
-[always-done]: https://github.com/hybridables/always-done
-[assertit]: https://github.com/tunnckoCore/assertit
-[clean-stacktrace]: https://github.com/tunnckocore/clean-stacktrace
-[core-assert]: https://github.com/sindresorhus/core-assert
-[istanbul]: https://github.com/gotwarlost/istanbul
-[mocha]: https://mochajs.org
-[testit]: https://github.com/ForbesLindesay/testit
