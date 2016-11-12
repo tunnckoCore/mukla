@@ -39,6 +39,7 @@
   * [Support functions that returns streams](#support-functions-that-returns-streams)
   * [Support functions that returns Child Process](#support-functions-that-returns-child-process)
   * [Handles any errors](#handles-any-errors)
+- [Related](#related)
 - [Contributing](#contributing)
 
 ## Install
@@ -342,6 +343,15 @@ test('failing test with SyntaxError', function () {
 
 **[back to top](#readme)**
 
+## Related
+- [always-done](https://www.npmjs.com/package/always-done): Handle completion and errors with elegance! Support for streams, callbacks, promises, child… [more](https://github.com/hybridables/always-done#readme) | [homepage](https://github.com/hybridables/always-done#readme "Handle completion and errors with elegance! Support for streams, callbacks, promises, child processes, async/await and sync functions. A drop-in replacement for [async-done][] - pass 100% of its tests plus more")
+- [core-assert](https://www.npmjs.com/package/core-assert): Node.js `assert` as a standalone module | [homepage](https://github.com/sindresorhus/core-assert#readme "Node.js `assert` as a standalone module")
+- [each-promise](https://www.npmjs.com/package/each-promise): Iterate over promises, promise-returning or async/await functions in series or parallel. Support… [more](https://github.com/tunnckocore/each-promise#readme) | [homepage](https://github.com/tunnckocore/each-promise#readme "Iterate over promises, promise-returning or async/await functions in series or parallel. Support settle (fail-fast), concurrency (limiting) and hooks system (start, beforeEach, afterEach, finish)")
+- [gruu](https://www.npmjs.com/package/gruu): Modern, small and powerful testing with TAP output and support for async/await… [more](https://github.com/tunnckocore/gruu#readme) | [homepage](https://github.com/tunnckocore/gruu#readme "Modern, small and powerful testing with TAP output and support for async/await, promises, callbacks, streams and observables, built on [always-done][].")
+- [minibase-is-registered](https://www.npmjs.com/package/minibase-is-registered): Plugin for [minibase][] and [base][], that adds `isRegistered` method to your application… [more](https://github.com/node-minibase/minibase-is-registered#readme) | [homepage](https://github.com/node-minibase/minibase-is-registered#readme "Plugin for [minibase][] and [base][], that adds `isRegistered` method to your application to detect if plugin is already registered and returns true or false if named plugin is already registered on the instance.")
+- [minibase](https://www.npmjs.com/package/minibase): MiniBase is minimalist approach to Base - @node-base, the awesome framework. Foundation… [more](https://github.com/node-minibase/minibase#readme) | [homepage](https://github.com/node-minibase/minibase#readme "MiniBase is minimalist approach to Base - @node-base, the awesome framework. Foundation for building complex APIs with small units called plugins. Works well with most of the already existing [base][] plugins.")
+- [try-catch-core](https://www.npmjs.com/package/try-catch-core): Low-level package to handle completion and errors of sync or asynchronous functions… [more](https://github.com/hybridables/try-catch-core#readme) | [homepage](https://github.com/hybridables/try-catch-core#readme "Low-level package to handle completion and errors of sync or asynchronous functions, using [once][] and [dezalgo][] libs. Useful for and used in higher-level libs such as [always-done][] to handle completion of anything.")
+
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/tunnckoCore/mukla/issues/new).  
 But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines.
@@ -352,12 +362,17 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 
 [always-done]: https://github.com/hybridables/always-done
 [assertit]: https://github.com/tunnckoCore/assertit
+[async-done]: https://github.com/gulpjs/async-done
+[base]: https://github.com/node-base/base
 [clean-stacktrace]: https://github.com/tunnckocore/clean-stacktrace
 [core-assert]: https://github.com/sindresorhus/core-assert
+[dezalgo]: https://github.com/npm/dezalgo
 [end-of-stream]: https://github.com/mafintosh/end-of-stream
 [istanbul]: https://github.com/gotwarlost/istanbul
+[minibase]: https://github.com/node-minibase/minibase
 [mocha]: https://mochajs.org
 [on-stream-end]: https://github.com/tunnckocore/on-stream-end
+[once]: https://github.com/isaacs/once
 [stream-exhaust]: https://github.com/chrisdickinson/stream-exhaust.git
 [testit]: https://github.com/ForbesLindesay/testit
 

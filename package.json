@@ -99,23 +99,36 @@
     "tasks": [
       "readme"
     ],
-    "lint": {
-      "reflinks": true
-    },
     "related": {
-      "list": []
+      "list": [
+        "minibase",
+        "minibase-is-registered",
+        "gruu",
+        "always-done",
+        "try-catch-core",
+        "core-assert",
+        "each-promise"
+      ]
     },
     "reflinks": [
       "always-done",
       "assertit",
       "clean-stacktrace",
       "core-assert",
+      "end-of-stream",
       "istanbul",
       "mocha",
-      "testit",
-      "end-of-stream",
       "on-stream-end",
-      "stream-exhaust"
-    ]
+      "stream-exhaust",
+      "testit",
+      "async-done",
+      "base",
+      "dezalgo",
+      "minibase",
+      "once"
+    ],
+    "lint": {
+      "reflinks": true
+    }
   }
 }
