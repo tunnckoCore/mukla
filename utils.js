@@ -2,26 +2,19 @@
 
 var path = require('path')
 var util = require('util')
-var utils = require('lazy-cache')(require)
-var fn = require
-require = utils // eslint-disable-line no-undef, no-native-reassign, no-global-assign
+var utils = {}
 
 /**
  * Lazily required module dependencies
  */
 
-require('always-done')
-require('clean-stacktrace')
-require('core-assert')
-require('error-symbol')
-require('extend-shallow')
-require('get-fn-name')
-require('success-symbol')
-require = fn // eslint-disable-line no-undef, no-native-reassign, no-global-assign
-
-utils.hasOwn = function hasOwn (self, key) {
-  return Object.prototype.hasOwnProperty.call(self, key)
-}
+utils.alwaysDone = require('always-done')
+utils.cleanStacktrace = require('clean-stacktrace')
+utils.coreAssert = require('core-assert')
+utils.errorSymbol = require('error-symbol')
+utils.extendShallow = require('extend-shallow')
+utils.getFnName = require('get-fn-name')
+utils.successSymbol = require('success-symbol')
 
 utils.diag = function diagnostic (err, showStack) {
   var res = ''
