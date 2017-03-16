@@ -49,7 +49,7 @@ var mukla = module.exports = function mukla (name, fn, showStack) {
     throw new TypeError('mukla: expect at least `fn` be function')
   }
   name = name || utils.getFnName(fn) || 'anonymous'
-  mukla.emit = mukla.reporter && mukla.reporter.emit || null
+  mukla.emit = (mukla.reporter && mukla.reporter.emit) || null
   mukla.emit = typeof mukla.emit === 'function' ? mukla.emit : null
 
   utils.alwaysDone(fn, {
