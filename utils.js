@@ -1,6 +1,5 @@
 'use strict'
 
-var path = require('path')
 var util = require('util')
 var utils = {}
 
@@ -9,7 +8,7 @@ var utils = {}
  */
 
 utils.alwaysDone = require('always-done')
-utils.cleanStacktrace = require('clean-stacktrace')
+utils.stackMetadata = require('stacktrace-metadata')
 utils.coreAssert = require('core-assert')
 utils.errorSymbol = require('error-symbol')
 utils.extendShallow = require('extend-shallow')
@@ -17,36 +16,15 @@ utils.getFnName = require('get-fn-name')
 utils.successSymbol = require('success-symbol')
 
 utils.diag = function diagnostic (err, showStack) {
-  var res = ''
+  var res = '  ---\n'
 
   // get message, or toString error object
   var msg = err.message && err.message.length
     ? err.message
     : err.toString()
 
-  // ensure stack exists
-  var stack = err.stack && err.stack.length
-    ? utils.cleanStacktrace(err.stack)
-    : null
-
-  // modify the cleaned up stacktrace if exist
-  var lines = stack
-    ? stack.split('\n').map(function (line) {
-      // transform to relative paths
-      var m = /.*\((.*)\).*/.exec(line)
-      line = m && m[1]
-        ? line.replace(m[1], path.relative(process.cwd(), m[1]))
-        : line
-
-      // handle correct ident of each line
-      return utils.ident('  ' + line, true)
-    })
-    : []
-
-  // get `at` position from first of "at" lines
-  var at = lines.length
-    ? lines[1].trim().slice(3)
-    : null
+  showStack = showStack ? showStack : false // eslint-disable-line no-unneeded-ternary
+  err = utils.stackMetadata(err, { showStack: showStack, shortStack: false })
 
   res += utils.ident('name: ' + err.name)
   res += utils.ident('message: ' + msg)
@@ -61,15 +39,15 @@ utils.diag = function diagnostic (err, showStack) {
     ? res + utils.ident('actual: ' + util.inspect(err.actual))
     : res
 
-  res = at ? res + utils.ident('at: ' + at) : res
+  res = err.at ? res + utils.ident('at: ' + err.at) : res
 
   // print stack trace if `showStack` option is `true`
-  if (showStack && stack) {
-    res += utils.ident('stack:\n' + lines.join('\n'))
+  if (showStack && err.stack) {
+    res += utils.ident('stack:\n' + err.stack.split('\n').slice(1).join('\n'))
   }
 
   res += utils.ident('...', true)
-  return '  ---\n' + res
+  return res
 }
 
 utils.ident = function ident (str, last) {

@@ -22,11 +22,11 @@
   },
   "dependencies": {
     "always-done": "^1.1.0",
-    "clean-stacktrace": "^1.0.0",
     "core-assert": "^0.2.1",
     "error-symbol": "^0.1.0",
     "extend-shallow": "^2.0.1",
     "get-fn-name": "^1.0.0",
+    "stacktrace-metadata": "^2.0.1",
     "success-symbol": "^0.1.0"
   },
   "devDependencies": {
