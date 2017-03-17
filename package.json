@@ -1,6 +1,6 @@
 {
   "name": "mukla",
-  "version": "0.4.8",
+  "version": "0.4.9",
   "description": "Small, parallel and fast test framework with suppport for async/await, promises, callbacks, streams and observables. Targets and works at node.js v0.10 and above.",
   "repository": "tunnckoCore/mukla",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
