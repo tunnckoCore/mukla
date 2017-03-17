@@ -111,19 +111,24 @@
     "reflinks": [
       "always-done",
       "assertit",
-      "clean-stacktrace",
-      "core-assert",
-      "end-of-stream",
-      "istanbul",
-      "mocha",
-      "on-stream-end",
-      "stream-exhaust",
-      "testit",
       "async-done",
       "base",
+      "clean-stacktrace",
+      "core-assert",
       "dezalgo",
+      "end-of-stream",
+      "istanbul",
       "minibase",
-      "once"
+      "mocha",
+      "on-stream-end",
+      "once",
+      "stream-exhaust",
+      "testit",
+      "charlike",
+      "commitizen",
+      "standard-version",
+      "verb",
+      "verb-generate-readme"
     ],
     "lint": {
       "reflinks": true
